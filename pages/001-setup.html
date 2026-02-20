@@ -349,14 +349,14 @@ What is a package manager?
 <p><a href="https://colab.google/">Google Colab</a> is a free, cloud‑based platform that lets you write and run Python code directly in your web browser. It provides an environment similar to Jupyter Notebooks, but without the need to install Python or any additional software on your computer. This makes it an ideal starting point for medics and healthcare professionals who want to explore machine learning without worrying about technical setup.</p>
 <p>Colab also includes a wide range of pre‑installed scientific and machine‑learning libraries—such as NumPy, Pandas, Matplotlib, and TensorFlow—so you can focus on learning concepts rather than configuring tools. Notebooks are easy to share, collaborate on, and store in Google Drive, making it a convenient platform for both individual study and group work. With its simplicity and accessibility, Colab provides a smooth entry point into Python programming and practical machine‑learning experimentation.</p>
 <p>Download <code>nhs_readmission.csv</code> from the course repository and place it in your working directory. You can verify everything is set up correctly by running this in a new notebook cell:</p>
-<div id="5484ce7c" class="cell" data-execution_count="1">
+<div id="29face81" class="cell" data-execution_count="1">
 <div class="sourceCode cell-code" id="cb8"><pre class="sourceCode python code-with-copy"><code class="sourceCode python"><span id="cb8-1"><a href="#cb8-1" aria-hidden="true" tabindex="-1"></a><span class="im">import</span> pandas <span class="im">as</span> pd</span>
 <span id="cb8-2"><a href="#cb8-2" aria-hidden="true" tabindex="-1"></a><span class="im">import</span> matplotlib.pyplot <span class="im">as</span> plt</span>
 <span id="cb8-3"><a href="#cb8-3" aria-hidden="true" tabindex="-1"></a><span class="im">import</span> seaborn <span class="im">as</span> sns</span>
 <span id="cb8-4"><a href="#cb8-4" aria-hidden="true" tabindex="-1"></a><span class="im">from</span> sklearn.ensemble <span class="im">import</span> RandomForestClassifier</span>
 <span id="cb8-5"><a href="#cb8-5" aria-hidden="true" tabindex="-1"></a></span>
 <span id="cb8-6"><a href="#cb8-6" aria-hidden="true" tabindex="-1"></a><span class="bu">print</span>(<span class="st">"All packages loaded successfully!"</span>)</span>
-<span id="cb8-7"><a href="#cb8-7" aria-hidden="true" tabindex="-1"></a>df <span class="op">=</span> pd.read_csv(<span class="st">"https://raw.githubusercontent.com/pauerola/nhs-data-science/refs/heads/main/data/nhs_readmission.csv"</span>)</span>
+<span id="cb8-7"><a href="#cb8-7" aria-hidden="true" tabindex="-1"></a>df <span class="op">=</span> pd.read_csv(<span class="st">"https://raw.githubusercontent.com/Bristol-Training/nhs-data-science/refs/heads/main/data/nhs_readmission.csv"</span>)</span>
 <span id="cb8-8"><a href="#cb8-8" aria-hidden="true" tabindex="-1"></a><span class="bu">print</span>(<span class="ss">f"Dataset loaded: </span><span class="sc">{</span>df<span class="sc">.</span>shape[<span class="dv">0</span>]<span class="sc">}</span><span class="ss"> patients, </span><span class="sc">{</span>df<span class="sc">.</span>shape[<span class="dv">1</span>]<span class="sc">}</span><span class="ss"> columns"</span>)</span>
 <span id="cb8-9"><a href="#cb8-9" aria-hidden="true" tabindex="-1"></a></span>
 <span id="cb8-10"><a href="#cb8-10" aria-hidden="true" tabindex="-1"></a>df.head()</span></code><button title="Copy to Clipboard" class="code-copy-button"><i class="bi"></i></button></pre></div>
@@ -370,7 +370,7 @@ What is a package manager?
 <span class="ansi-cyan-fg">Cell</span><span class="ansi-cyan-fg"> </span><span class="ansi-green-fg">In[1]</span><span class="ansi-green-fg">, line 7</span>
 <span class="ansi-green-fg">      4</span> <span style="font-weight:bold;color:rgb(0,135,0)">from</span><span style="color:rgb(188,188,188)"> </span><span class="ansi-blue-fg ansi-bold">sklearn</span><span class="ansi-blue-fg ansi-bold">.</span><span class="ansi-blue-fg ansi-bold">ensemble</span><span style="color:rgb(188,188,188)"> </span><span style="font-weight:bold;color:rgb(0,135,0)">import</span> RandomForestClassifier
 <span class="ansi-green-fg">      6</span> <span style="color:rgb(0,135,0)">print</span>(<span class="ansi-yellow-fg">"</span><span class="ansi-yellow-fg">All packages loaded successfully!</span><span class="ansi-yellow-fg">"</span>)
-<span class="ansi-green-fg">----&gt; </span><span class="ansi-green-fg">7</span> df = pd.read_csv(<span class="ansi-yellow-fg">"</span><span class="ansi-yellow-fg">https://raw.githubusercontent.com/pauerola/nhs-data-science/refs/heads/main/data/nhs_readmission.csv</span><span class="ansi-yellow-fg">"</span>)
+<span class="ansi-green-fg">----&gt; </span><span class="ansi-green-fg">7</span> df = pd.read_csv(<span class="ansi-yellow-fg">"</span><span class="ansi-yellow-fg">https://raw.githubusercontent.com/Bristol-Training/nhs-data-science/refs/heads/main/data/nhs_readmission.csv</span><span class="ansi-yellow-fg">"</span>)
 <span class="ansi-green-fg">      8</span> <span style="color:rgb(0,135,0)">print</span>(<span class="ansi-yellow-fg">f</span><span class="ansi-yellow-fg">"</span><span class="ansi-yellow-fg">Dataset loaded: </span><span style="font-weight:bold;color:rgb(175,95,135)">{</span>df.shape[<span class="ansi-green-fg">0</span>]<span style="font-weight:bold;color:rgb(175,95,135)">}</span><span class="ansi-yellow-fg"> patients, </span><span style="font-weight:bold;color:rgb(175,95,135)">{</span>df.shape[<span class="ansi-green-fg">1</span>]<span style="font-weight:bold;color:rgb(175,95,135)">}</span><span class="ansi-yellow-fg"> columns</span><span class="ansi-yellow-fg">"</span>)
 <span class="ansi-green-fg">     10</span> df.head()
 
@@ -522,7 +522,7 @@ window.document.addEventListener("DOMContentLoaded", function (event) {
   }
     var localhostRegex = new RegExp(/^(?:http|https):\/\/localhost\:?[0-9]*\//);
     var mailtoRegex = new RegExp(/^mailto:/);
-      var filterRegex = new RegExp('/' + window.location.host + '/');
+      var filterRegex = new RegExp("https:\/\/Bristol-Training\.github\.io\/nhs-data-science\/");
     var isInternal = (href) => {
         return filterRegex.test(href) || localhostRegex.test(href) || mailtoRegex.test(href);
     }

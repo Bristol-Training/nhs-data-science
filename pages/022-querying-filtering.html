@@ -236,7 +236,6 @@ pre > code.sourceCode > span > a:first-child::before { text-decoration: underlin
   <li><a href="#multiple-conditions" id="toc-multiple-conditions" class="nav-link" data-scroll-target="#multiple-conditions">Multiple conditions</a></li>
   <li><a href="#filtering-on-missing-values" id="toc-filtering-on-missing-values" class="nav-link" data-scroll-target="#filtering-on-missing-values">Filtering on missing values</a></li>
   <li><a href="#handling-missing-data" id="toc-handling-missing-data" class="nav-link" data-scroll-target="#handling-missing-data">Handling Missing Data</a></li>
-  <li><a href="#the-three-types-of-missingness" id="toc-the-three-types-of-missingness" class="nav-link" data-scroll-target="#the-three-types-of-missingness">The three types of missingness</a></li>
   <li><a href="#strategy-1-drop-rows-with-missing-values" id="toc-strategy-1-drop-rows-with-missing-values" class="nav-link" data-scroll-target="#strategy-1-drop-rows-with-missing-values">Strategy 1: Drop rows with missing values</a></li>
   <li><a href="#strategy-2-impute-with-the-median" id="toc-strategy-2-impute-with-the-median" class="nav-link" data-scroll-target="#strategy-2-impute-with-the-median">Strategy 2: Impute with the median</a></li>
   <li><a href="#strategy-3-indicator-column-recommended-for-mnar" id="toc-strategy-3-indicator-column-recommended-for-mnar" class="nav-link" data-scroll-target="#strategy-3-indicator-column-recommended-for-mnar">Strategy 3: Indicator column (recommended for MNAR)</a></li>
@@ -273,7 +272,7 @@ pre > code.sourceCode > span > a:first-child::before { text-decoration: underlin
 </section>
 <section id="single-condition" class="level3">
 <h3 class="anchored" data-anchor-id="single-condition">Single condition</h3>
-<div id="bcd678b9" class="cell" data-execution_count="2">
+<div id="917106a8" class="cell" data-execution_count="2">
 <div class="sourceCode cell-code" id="cb1"><pre class="sourceCode python code-with-copy"><code class="sourceCode python"><span id="cb1-1"><a href="#cb1-1" aria-hidden="true" tabindex="-1"></a><span class="co"># All patients aged over 65</span></span>
 <span id="cb1-2"><a href="#cb1-2" aria-hidden="true" tabindex="-1"></a>elderly <span class="op">=</span> df[df[<span class="st">"age"</span>] <span class="op">&gt;</span> <span class="dv">65</span>]</span>
 <span id="cb1-3"><a href="#cb1-3" aria-hidden="true" tabindex="-1"></a><span class="bu">print</span>(<span class="ss">f"Patients over 65: </span><span class="sc">{</span><span class="bu">len</span>(elderly)<span class="sc">}</span><span class="ss">"</span>)</span></code><button title="Copy to Clipboard" class="code-copy-button"><i class="bi"></i></button></pre></div>
@@ -286,7 +285,7 @@ pre > code.sourceCode > span > a:first-child::before { text-decoration: underlin
 <section id="multiple-conditions" class="level3">
 <h3 class="anchored" data-anchor-id="multiple-conditions">Multiple conditions</h3>
 <p>Use <code>&amp;</code> (AND) and <code>|</code> (OR) to combine conditions. Each condition must be wrapped in parentheses:</p>
-<div id="b523c8d1" class="cell" data-execution_count="3">
+<div id="dbcac885" class="cell" data-execution_count="3">
 <div class="sourceCode cell-code" id="cb4"><pre class="sourceCode python code-with-copy"><code class="sourceCode python"><span id="cb4-1"><a href="#cb4-1" aria-hidden="true" tabindex="-1"></a><span class="co"># Elderly patients with Type 2 diabetes (E11)</span></span>
 <span id="cb4-2"><a href="#cb4-2" aria-hidden="true" tabindex="-1"></a>elderly_dm <span class="op">=</span> df[(df[<span class="st">"age"</span>] <span class="op">&gt;</span> <span class="dv">65</span>) <span class="op">&amp;</span> (df[<span class="st">"primary_diagnosis"</span>] <span class="op">==</span> <span class="st">"E11"</span>)]</span>
 <span id="cb4-3"><a href="#cb4-3" aria-hidden="true" tabindex="-1"></a><span class="bu">print</span>(<span class="ss">f"Elderly T2DM patients: </span><span class="sc">{</span><span class="bu">len</span>(elderly_dm)<span class="sc">}</span><span class="ss">"</span>)</span>
@@ -296,13 +295,13 @@ pre > code.sourceCode > span > a:first-child::before { text-decoration: underlin
             age  hba1c  charlson_index
 patient_id                            
 1001         69   67.6               2
-1007         87   60.2               1
+1007         87    NaN               1
 1021         85   43.9               2
 1028         68   75.9               3
 1035         75   89.2               4</code></pre>
 </div>
 </div>
-<div id="b19ba0c4" class="cell" data-execution_count="4">
+<div id="48363a0c" class="cell" data-execution_count="4">
 <div class="sourceCode cell-code" id="cb6"><pre class="sourceCode python code-with-copy"><code class="sourceCode python"><span id="cb6-1"><a href="#cb6-1" aria-hidden="true" tabindex="-1"></a><span class="co"># Heart failure (I50) OR COPD (J44) patients with long stays</span></span>
 <span id="cb6-2"><a href="#cb6-2" aria-hidden="true" tabindex="-1"></a>complex_patients <span class="op">=</span> df[</span>
 <span id="cb6-3"><a href="#cb6-3" aria-hidden="true" tabindex="-1"></a>    (df[<span class="st">"primary_diagnosis"</span>].isin([<span class="st">"I50"</span>, <span class="st">"J44"</span>])) <span class="op">&amp;</span> </span>
@@ -316,7 +315,7 @@ patient_id
 </section>
 <section id="filtering-on-missing-values" class="level3">
 <h3 class="anchored" data-anchor-id="filtering-on-missing-values">Filtering on missing values</h3>
-<div id="204e49e6" class="cell" data-execution_count="5">
+<div id="4787b215" class="cell" data-execution_count="5">
 <div class="sourceCode cell-code" id="cb8"><pre class="sourceCode python code-with-copy"><code class="sourceCode python"><span id="cb8-1"><a href="#cb8-1" aria-hidden="true" tabindex="-1"></a><span class="co"># Patients with a missing HbA1c</span></span>
 <span id="cb8-2"><a href="#cb8-2" aria-hidden="true" tabindex="-1"></a>missing_hba1c <span class="op">=</span> df[df[<span class="st">"hba1c"</span>].isnull()]</span>
 <span id="cb8-3"><a href="#cb8-3" aria-hidden="true" tabindex="-1"></a><span class="bu">print</span>(<span class="ss">f"Patients with no HbA1c result: </span><span class="sc">{</span><span class="bu">len</span>(missing_hba1c)<span class="sc">}</span><span class="ss">"</span>)</span>
@@ -325,12 +324,10 @@ patient_id
 <span id="cb8-6"><a href="#cb8-6" aria-hidden="true" tabindex="-1"></a>has_hba1c <span class="op">=</span> df[df[<span class="st">"hba1c"</span>].notnull()]</span>
 <span id="cb8-7"><a href="#cb8-7" aria-hidden="true" tabindex="-1"></a><span class="bu">print</span>(<span class="ss">f"Patients with HbA1c result: </span><span class="sc">{</span><span class="bu">len</span>(has_hba1c)<span class="sc">}</span><span class="ss">"</span>)</span></code><button title="Copy to Clipboard" class="code-copy-button"><i class="bi"></i></button></pre></div>
 <div class="cell-output cell-output-stdout">
-<pre><code>Patients with no HbA1c result: 0
-Patients with HbA1c result: 5002</code></pre>
+<pre><code>Patients with no HbA1c result: 811
+Patients with HbA1c result: 4191</code></pre>
 </div>
 </div>
-<pre><code>Patients with no HbA1c result: 812
-Patients with HbA1c result: 4188</code></pre>
 <div class="callout callout-style-default callout-tip callout-titled">
 <div class="callout-header d-flex align-content-center">
 <div class="callout-icon-container">
@@ -360,18 +357,18 @@ Answer
 </div>
 <div id="callout-2" class="callout-2-contents callout-collapse collapse">
 <div class="callout-body-container callout-body">
-<div id="a5e38b8f" class="cell" data-execution_count="6">
-<div class="sourceCode cell-code" id="cb11"><pre class="sourceCode python code-with-copy"><code class="sourceCode python"><span id="cb11-1"><a href="#cb11-1" aria-hidden="true" tabindex="-1"></a><span class="co"># 1.</span></span>
-<span id="cb11-2"><a href="#cb11-2" aria-hidden="true" tabindex="-1"></a>high_charlson <span class="op">=</span> df[df[<span class="st">"charlson_index"</span>] <span class="op">&gt;=</span> <span class="dv">5</span>]</span>
-<span id="cb11-3"><a href="#cb11-3" aria-hidden="true" tabindex="-1"></a><span class="bu">print</span>(<span class="bu">len</span>(high_charlson))</span>
-<span id="cb11-4"><a href="#cb11-4" aria-hidden="true" tabindex="-1"></a></span>
-<span id="cb11-5"><a href="#cb11-5" aria-hidden="true" tabindex="-1"></a><span class="co"># 2.</span></span>
-<span id="cb11-6"><a href="#cb11-6" aria-hidden="true" tabindex="-1"></a>ckd_patients <span class="op">=</span> df[df[<span class="st">"primary_diagnosis"</span>] <span class="op">==</span> <span class="st">"N18"</span>]</span>
-<span id="cb11-7"><a href="#cb11-7" aria-hidden="true" tabindex="-1"></a><span class="bu">print</span>(<span class="ss">f"CKD patients: </span><span class="sc">{</span><span class="bu">len</span>(ckd_patients)<span class="sc">}</span><span class="ss">"</span>)</span>
-<span id="cb11-8"><a href="#cb11-8" aria-hidden="true" tabindex="-1"></a></span>
-<span id="cb11-9"><a href="#cb11-9" aria-hidden="true" tabindex="-1"></a><span class="co"># 3.</span></span>
-<span id="cb11-10"><a href="#cb11-10" aria-hidden="true" tabindex="-1"></a>readmit_rate <span class="op">=</span> (ckd_patients[<span class="st">"readmitted_30d"</span>] <span class="op">==</span> <span class="st">"Yes"</span>).mean()</span>
-<span id="cb11-11"><a href="#cb11-11" aria-hidden="true" tabindex="-1"></a><span class="bu">print</span>(<span class="ss">f"CKD 30-day readmission rate: </span><span class="sc">{</span>readmit_rate<span class="sc">:.1%}</span><span class="ss">"</span>)</span></code><button title="Copy to Clipboard" class="code-copy-button"><i class="bi"></i></button></pre></div>
+<div id="282bf280" class="cell" data-execution_count="6">
+<div class="sourceCode cell-code" id="cb10"><pre class="sourceCode python code-with-copy"><code class="sourceCode python"><span id="cb10-1"><a href="#cb10-1" aria-hidden="true" tabindex="-1"></a><span class="co"># 1.</span></span>
+<span id="cb10-2"><a href="#cb10-2" aria-hidden="true" tabindex="-1"></a>high_charlson <span class="op">=</span> df[df[<span class="st">"charlson_index"</span>] <span class="op">&gt;=</span> <span class="dv">5</span>]</span>
+<span id="cb10-3"><a href="#cb10-3" aria-hidden="true" tabindex="-1"></a><span class="bu">print</span>(<span class="bu">len</span>(high_charlson))</span>
+<span id="cb10-4"><a href="#cb10-4" aria-hidden="true" tabindex="-1"></a></span>
+<span id="cb10-5"><a href="#cb10-5" aria-hidden="true" tabindex="-1"></a><span class="co"># 2.</span></span>
+<span id="cb10-6"><a href="#cb10-6" aria-hidden="true" tabindex="-1"></a>ckd_patients <span class="op">=</span> df[df[<span class="st">"primary_diagnosis"</span>] <span class="op">==</span> <span class="st">"N18"</span>]</span>
+<span id="cb10-7"><a href="#cb10-7" aria-hidden="true" tabindex="-1"></a><span class="bu">print</span>(<span class="ss">f"CKD patients: </span><span class="sc">{</span><span class="bu">len</span>(ckd_patients)<span class="sc">}</span><span class="ss">"</span>)</span>
+<span id="cb10-8"><a href="#cb10-8" aria-hidden="true" tabindex="-1"></a></span>
+<span id="cb10-9"><a href="#cb10-9" aria-hidden="true" tabindex="-1"></a><span class="co"># 3.</span></span>
+<span id="cb10-10"><a href="#cb10-10" aria-hidden="true" tabindex="-1"></a>readmit_rate <span class="op">=</span> (ckd_patients[<span class="st">"readmitted_30d"</span>] <span class="op">==</span> <span class="st">"Yes"</span>).mean()</span>
+<span id="cb10-11"><a href="#cb10-11" aria-hidden="true" tabindex="-1"></a><span class="bu">print</span>(<span class="ss">f"CKD 30-day readmission rate: </span><span class="sc">{</span>readmit_rate<span class="sc">:.1%}</span><span class="ss">"</span>)</span></code><button title="Copy to Clipboard" class="code-copy-button"><i class="bi"></i></button></pre></div>
 <div class="cell-output cell-output-stdout">
 <pre><code>345
 CKD patients: 358
@@ -385,9 +382,7 @@ CKD 30-day readmission rate: 19.0%</code></pre>
 <section id="handling-missing-data" class="level3">
 <h3 class="anchored" data-anchor-id="handling-missing-data">Handling Missing Data</h3>
 <p>Missing data is endemic in medical records. Understanding <em>why</em> data is missing matters as much as knowing <em>how</em> to handle it technically.</p>
-</section>
-<section id="the-three-types-of-missingness" class="level3">
-<h3 class="anchored" data-anchor-id="the-three-types-of-missingness">The three types of missingness</h3>
+<p><strong><em>The three types of missingness</em></strong></p>
 <table class="caption-top table">
 <colgroup>
 <col style="width: 20%">
@@ -423,18 +418,16 @@ CKD 30-day readmission rate: 19.0%</code></pre>
 </section>
 <section id="strategy-1-drop-rows-with-missing-values" class="level3">
 <h3 class="anchored" data-anchor-id="strategy-1-drop-rows-with-missing-values">Strategy 1: Drop rows with missing values</h3>
-<div id="a020cd76" class="cell" data-execution_count="7">
-<div class="sourceCode cell-code" id="cb13"><pre class="sourceCode python code-with-copy"><code class="sourceCode python"><span id="cb13-1"><a href="#cb13-1" aria-hidden="true" tabindex="-1"></a><span class="co"># Drop any row with a missing value in critical columns</span></span>
-<span id="cb13-2"><a href="#cb13-2" aria-hidden="true" tabindex="-1"></a>df_dropped <span class="op">=</span> df.dropna(subset<span class="op">=</span>[<span class="st">"hba1c"</span>, <span class="st">"egfr"</span>])</span>
-<span id="cb13-3"><a href="#cb13-3" aria-hidden="true" tabindex="-1"></a><span class="bu">print</span>(<span class="ss">f"Rows after dropping missing hba1c/egfr: </span><span class="sc">{</span><span class="bu">len</span>(df_dropped)<span class="sc">}</span><span class="ss">"</span>)</span>
-<span id="cb13-4"><a href="#cb13-4" aria-hidden="true" tabindex="-1"></a><span class="bu">print</span>(<span class="ss">f"Rows removed: </span><span class="sc">{</span><span class="bu">len</span>(df) <span class="op">-</span> <span class="bu">len</span>(df_dropped)<span class="sc">}</span><span class="ss">"</span>)</span></code><button title="Copy to Clipboard" class="code-copy-button"><i class="bi"></i></button></pre></div>
+<div id="6c3dbb41" class="cell" data-execution_count="7">
+<div class="sourceCode cell-code" id="cb12"><pre class="sourceCode python code-with-copy"><code class="sourceCode python"><span id="cb12-1"><a href="#cb12-1" aria-hidden="true" tabindex="-1"></a><span class="co"># Drop any row with a missing value in critical columns</span></span>
+<span id="cb12-2"><a href="#cb12-2" aria-hidden="true" tabindex="-1"></a>df_dropped <span class="op">=</span> df.dropna(subset<span class="op">=</span>[<span class="st">"hba1c"</span>, <span class="st">"egfr"</span>])</span>
+<span id="cb12-3"><a href="#cb12-3" aria-hidden="true" tabindex="-1"></a><span class="bu">print</span>(<span class="ss">f"Rows after dropping missing hba1c/egfr: </span><span class="sc">{</span><span class="bu">len</span>(df_dropped)<span class="sc">}</span><span class="ss">"</span>)</span>
+<span id="cb12-4"><a href="#cb12-4" aria-hidden="true" tabindex="-1"></a><span class="bu">print</span>(<span class="ss">f"Rows removed: </span><span class="sc">{</span><span class="bu">len</span>(df) <span class="op">-</span> <span class="bu">len</span>(df_dropped)<span class="sc">}</span><span class="ss">"</span>)</span></code><button title="Copy to Clipboard" class="code-copy-button"><i class="bi"></i></button></pre></div>
 <div class="cell-output cell-output-stdout">
-<pre><code>Rows after dropping missing hba1c/egfr: 5002
-Rows removed: 0</code></pre>
-</div>
-</div>
 <pre><code>Rows after dropping missing hba1c/egfr: 3821
-Rows removed: 1179</code></pre>
+Rows removed: 1181</code></pre>
+</div>
+</div>
 <div class="callout callout-style-default callout-warning callout-titled">
 <div class="callout-header d-flex align-content-center">
 <div class="callout-icon-container">
@@ -452,13 +445,13 @@ Use <code>dropna()</code> with caution
 <section id="strategy-2-impute-with-the-median" class="level3">
 <h3 class="anchored" data-anchor-id="strategy-2-impute-with-the-median">Strategy 2: Impute with the median</h3>
 <p>For skewed clinical variables (e.g.&nbsp;length of stay, HbA1c), the <strong>median</strong> is a better imputation value than the mean because it is robust to outliers:</p>
-<div id="a89f5329" class="cell" data-execution_count="8">
-<div class="sourceCode cell-code" id="cb16"><pre class="sourceCode python code-with-copy"><code class="sourceCode python"><span id="cb16-1"><a href="#cb16-1" aria-hidden="true" tabindex="-1"></a><span class="co"># Impute missing BMI with the median</span></span>
-<span id="cb16-2"><a href="#cb16-2" aria-hidden="true" tabindex="-1"></a>bmi_median <span class="op">=</span> df[<span class="st">"bmi"</span>].median()</span>
-<span id="cb16-3"><a href="#cb16-3" aria-hidden="true" tabindex="-1"></a><span class="bu">print</span>(<span class="ss">f"Median BMI: </span><span class="sc">{</span>bmi_median<span class="sc">:.1f}</span><span class="ss">"</span>)</span>
-<span id="cb16-4"><a href="#cb16-4" aria-hidden="true" tabindex="-1"></a></span>
-<span id="cb16-5"><a href="#cb16-5" aria-hidden="true" tabindex="-1"></a>df[<span class="st">"bmi"</span>] <span class="op">=</span> df[<span class="st">"bmi"</span>].fillna(bmi_median)</span>
-<span id="cb16-6"><a href="#cb16-6" aria-hidden="true" tabindex="-1"></a><span class="bu">print</span>(<span class="ss">f"Remaining BMI missing: </span><span class="sc">{</span>df[<span class="st">'bmi'</span>]<span class="sc">.</span>isnull()<span class="sc">.</span><span class="bu">sum</span>()<span class="sc">}</span><span class="ss">"</span>)</span></code><button title="Copy to Clipboard" class="code-copy-button"><i class="bi"></i></button></pre></div>
+<div id="c3e93252" class="cell" data-execution_count="8">
+<div class="sourceCode cell-code" id="cb14"><pre class="sourceCode python code-with-copy"><code class="sourceCode python"><span id="cb14-1"><a href="#cb14-1" aria-hidden="true" tabindex="-1"></a><span class="co"># Impute missing BMI with the median</span></span>
+<span id="cb14-2"><a href="#cb14-2" aria-hidden="true" tabindex="-1"></a>bmi_median <span class="op">=</span> df[<span class="st">"bmi"</span>].median()</span>
+<span id="cb14-3"><a href="#cb14-3" aria-hidden="true" tabindex="-1"></a><span class="bu">print</span>(<span class="ss">f"Median BMI: </span><span class="sc">{</span>bmi_median<span class="sc">:.1f}</span><span class="ss">"</span>)</span>
+<span id="cb14-4"><a href="#cb14-4" aria-hidden="true" tabindex="-1"></a></span>
+<span id="cb14-5"><a href="#cb14-5" aria-hidden="true" tabindex="-1"></a>df[<span class="st">"bmi"</span>] <span class="op">=</span> df[<span class="st">"bmi"</span>].fillna(bmi_median)</span>
+<span id="cb14-6"><a href="#cb14-6" aria-hidden="true" tabindex="-1"></a><span class="bu">print</span>(<span class="ss">f"Remaining BMI missing: </span><span class="sc">{</span>df[<span class="st">'bmi'</span>]<span class="sc">.</span>isnull()<span class="sc">.</span><span class="bu">sum</span>()<span class="sc">}</span><span class="ss">"</span>)</span></code><button title="Copy to Clipboard" class="code-copy-button"><i class="bi"></i></button></pre></div>
 <div class="cell-output cell-output-stdout">
 <pre><code>Median BMI: 28.1
 Remaining BMI missing: 0</code></pre>
@@ -467,23 +460,23 @@ Remaining BMI missing: 0</code></pre>
 <pre><code>Median BMI: 27.8
 Remaining BMI missing: 0</code></pre>
 <p>For categorical variables, impute with the <strong>mode</strong> (most common value):</p>
-<div id="6d52c17b" class="cell" data-execution_count="9">
-<div class="sourceCode cell-code" id="cb19"><pre class="sourceCode python code-with-copy"><code class="sourceCode python"><span id="cb19-1"><a href="#cb19-1" aria-hidden="true" tabindex="-1"></a><span class="co"># Impute missing ward with the most common ward</span></span>
-<span id="cb19-2"><a href="#cb19-2" aria-hidden="true" tabindex="-1"></a>ward_mode <span class="op">=</span> df[<span class="st">"discharge_ward"</span>].mode()[<span class="dv">0</span>]</span>
-<span id="cb19-3"><a href="#cb19-3" aria-hidden="true" tabindex="-1"></a>df[<span class="st">"discharge_ward"</span>] <span class="op">=</span> df[<span class="st">"discharge_ward"</span>].fillna(ward_mode)</span></code><button title="Copy to Clipboard" class="code-copy-button"><i class="bi"></i></button></pre></div>
+<div id="e94116e2" class="cell" data-execution_count="9">
+<div class="sourceCode cell-code" id="cb17"><pre class="sourceCode python code-with-copy"><code class="sourceCode python"><span id="cb17-1"><a href="#cb17-1" aria-hidden="true" tabindex="-1"></a><span class="co"># Impute missing ward with the most common ward</span></span>
+<span id="cb17-2"><a href="#cb17-2" aria-hidden="true" tabindex="-1"></a>ward_mode <span class="op">=</span> df[<span class="st">"discharge_ward"</span>].mode()[<span class="dv">0</span>]</span>
+<span id="cb17-3"><a href="#cb17-3" aria-hidden="true" tabindex="-1"></a>df[<span class="st">"discharge_ward"</span>] <span class="op">=</span> df[<span class="st">"discharge_ward"</span>].fillna(ward_mode)</span></code><button title="Copy to Clipboard" class="code-copy-button"><i class="bi"></i></button></pre></div>
 </div>
 </section>
 <section id="strategy-3-indicator-column-recommended-for-mnar" class="level3">
 <h3 class="anchored" data-anchor-id="strategy-3-indicator-column-recommended-for-mnar">Strategy 3: Indicator column (recommended for MNAR)</h3>
 <p>Create a new column flagging whether the value was originally missing, then impute. This preserves the information that the value was absent:</p>
-<div id="c71b68fc" class="cell" data-execution_count="10">
-<div class="sourceCode cell-code" id="cb20"><pre class="sourceCode python code-with-copy"><code class="sourceCode python"><span id="cb20-1"><a href="#cb20-1" aria-hidden="true" tabindex="-1"></a><span class="co"># For HbA1c: flag missingness before imputing</span></span>
-<span id="cb20-2"><a href="#cb20-2" aria-hidden="true" tabindex="-1"></a>df[<span class="st">"hba1c_missing"</span>] <span class="op">=</span> df[<span class="st">"hba1c"</span>].isnull().astype(<span class="bu">int</span>)</span>
-<span id="cb20-3"><a href="#cb20-3" aria-hidden="true" tabindex="-1"></a></span>
-<span id="cb20-4"><a href="#cb20-4" aria-hidden="true" tabindex="-1"></a><span class="co"># Then impute with median</span></span>
-<span id="cb20-5"><a href="#cb20-5" aria-hidden="true" tabindex="-1"></a>df[<span class="st">"hba1c"</span>] <span class="op">=</span> df[<span class="st">"hba1c"</span>].fillna(df[<span class="st">"hba1c"</span>].median())</span>
-<span id="cb20-6"><a href="#cb20-6" aria-hidden="true" tabindex="-1"></a></span>
-<span id="cb20-7"><a href="#cb20-7" aria-hidden="true" tabindex="-1"></a><span class="bu">print</span>(df[[<span class="st">"hba1c"</span>, <span class="st">"hba1c_missing"</span>]].head(<span class="dv">8</span>))</span></code><button title="Copy to Clipboard" class="code-copy-button"><i class="bi"></i></button></pre></div>
+<div id="c5a312b3" class="cell" data-execution_count="10">
+<div class="sourceCode cell-code" id="cb18"><pre class="sourceCode python code-with-copy"><code class="sourceCode python"><span id="cb18-1"><a href="#cb18-1" aria-hidden="true" tabindex="-1"></a><span class="co"># For HbA1c: flag missingness before imputing</span></span>
+<span id="cb18-2"><a href="#cb18-2" aria-hidden="true" tabindex="-1"></a>df[<span class="st">"hba1c_missing"</span>] <span class="op">=</span> df[<span class="st">"hba1c"</span>].isnull().astype(<span class="bu">int</span>)</span>
+<span id="cb18-3"><a href="#cb18-3" aria-hidden="true" tabindex="-1"></a></span>
+<span id="cb18-4"><a href="#cb18-4" aria-hidden="true" tabindex="-1"></a><span class="co"># Then impute with median</span></span>
+<span id="cb18-5"><a href="#cb18-5" aria-hidden="true" tabindex="-1"></a>df[<span class="st">"hba1c"</span>] <span class="op">=</span> df[<span class="st">"hba1c"</span>].fillna(df[<span class="st">"hba1c"</span>].median())</span>
+<span id="cb18-6"><a href="#cb18-6" aria-hidden="true" tabindex="-1"></a></span>
+<span id="cb18-7"><a href="#cb18-7" aria-hidden="true" tabindex="-1"></a><span class="bu">print</span>(df[[<span class="st">"hba1c"</span>, <span class="st">"hba1c_missing"</span>]].head(<span class="dv">8</span>))</span></code><button title="Copy to Clipboard" class="code-copy-button"><i class="bi"></i></button></pre></div>
 <div class="cell-output cell-output-stdout">
 <pre><code>            hba1c  hba1c_missing
 patient_id                      
@@ -493,7 +486,7 @@ patient_id
 1004         55.5              0
 1005         59.8              0
 1006         66.8              0
-1007         60.2              0
+1007         60.2              1
 1008         49.3              0</code></pre>
 </div>
 </div>
@@ -521,16 +514,16 @@ Important points
 <section id="verify-the-data-is-clean" class="level3">
 <h3 class="anchored" data-anchor-id="verify-the-data-is-clean">Verify the data is clean</h3>
 <p>After imputation, always confirm no unexpected missingness remains:</p>
-<div id="8e507336" class="cell" data-execution_count="11">
-<div class="sourceCode cell-code" id="cb23"><pre class="sourceCode python code-with-copy"><code class="sourceCode python"><span id="cb23-1"><a href="#cb23-1" aria-hidden="true" tabindex="-1"></a><span class="bu">print</span>(<span class="st">"Remaining missing values:"</span>)</span>
-<span id="cb23-2"><a href="#cb23-2" aria-hidden="true" tabindex="-1"></a><span class="bu">print</span>(df[[<span class="st">"age"</span>, <span class="st">"bmi"</span>, <span class="st">"hba1c"</span>, <span class="st">"egfr"</span>, <span class="st">"charlson_index"</span>]].isnull().<span class="bu">sum</span>())</span></code><button title="Copy to Clipboard" class="code-copy-button"><i class="bi"></i></button></pre></div>
+<div id="d490bc85" class="cell" data-execution_count="11">
+<div class="sourceCode cell-code" id="cb21"><pre class="sourceCode python code-with-copy"><code class="sourceCode python"><span id="cb21-1"><a href="#cb21-1" aria-hidden="true" tabindex="-1"></a><span class="bu">print</span>(<span class="st">"Remaining missing values:"</span>)</span>
+<span id="cb21-2"><a href="#cb21-2" aria-hidden="true" tabindex="-1"></a><span class="bu">print</span>(df[[<span class="st">"age"</span>, <span class="st">"bmi"</span>, <span class="st">"hba1c"</span>, <span class="st">"egfr"</span>, <span class="st">"charlson_index"</span>]].isnull().<span class="bu">sum</span>())</span></code><button title="Copy to Clipboard" class="code-copy-button"><i class="bi"></i></button></pre></div>
 <div class="cell-output cell-output-stdout">
 <pre><code>Remaining missing values:
-age               0
-bmi               0
-hba1c             0
-egfr              0
-charlson_index    0
+age                 0
+bmi                 0
+hba1c               0
+egfr              445
+charlson_index      0
 dtype: int64</code></pre>
 </div>
 </div>
@@ -541,13 +534,6 @@ egfr            445
 charlson_index    0
 dtype: int64</code></pre>
 <p><code>egfr</code> still has 445 missing — we’ll apply the same indicator strategy before modelling.</p>
-<div id="de005409" class="cell" data-execution_count="12">
-<div class="sourceCode cell-code" id="cb26"><pre class="sourceCode python code-with-copy"><code class="sourceCode python"><span id="cb26-1"><a href="#cb26-1" aria-hidden="true" tabindex="-1"></a><span class="co"># For egfr: flag missingness before imputing</span></span>
-<span id="cb26-2"><a href="#cb26-2" aria-hidden="true" tabindex="-1"></a>df[<span class="st">"egfr_missing"</span>] <span class="op">=</span> df[<span class="st">"egfr"</span>].isnull().astype(<span class="bu">int</span>)</span>
-<span id="cb26-3"><a href="#cb26-3" aria-hidden="true" tabindex="-1"></a></span>
-<span id="cb26-4"><a href="#cb26-4" aria-hidden="true" tabindex="-1"></a><span class="co"># Then impute with median</span></span>
-<span id="cb26-5"><a href="#cb26-5" aria-hidden="true" tabindex="-1"></a>df[<span class="st">"egfr"</span>] <span class="op">=</span> df[<span class="st">"egfr"</span>].fillna(df[<span class="st">"egfr"</span>].median())</span></code><button title="Copy to Clipboard" class="code-copy-button"><i class="bi"></i></button></pre></div>
-</div>
 <div class="callout callout-style-default callout-tip callout-titled">
 <div class="callout-header d-flex align-content-center">
 <div class="callout-icon-container">
@@ -578,22 +564,66 @@ Answer
 </div>
 <div id="callout-6" class="callout-6-contents callout-collapse collapse">
 <div class="callout-body-container callout-body">
-<div id="f8cb8610" class="cell" data-execution_count="13">
-<div class="sourceCode cell-code" id="cb27"><pre class="sourceCode python code-with-copy"><code class="sourceCode python"><span id="cb27-1"><a href="#cb27-1" aria-hidden="true" tabindex="-1"></a><span class="co"># 1. Flag missingness</span></span>
-<span id="cb27-2"><a href="#cb27-2" aria-hidden="true" tabindex="-1"></a>df[<span class="st">"egfr_missing"</span>] <span class="op">=</span> df[<span class="st">"egfr"</span>].isnull().astype(<span class="bu">int</span>)</span>
-<span id="cb27-3"><a href="#cb27-3" aria-hidden="true" tabindex="-1"></a></span>
-<span id="cb27-4"><a href="#cb27-4" aria-hidden="true" tabindex="-1"></a><span class="co"># 2. Impute with median</span></span>
-<span id="cb27-5"><a href="#cb27-5" aria-hidden="true" tabindex="-1"></a>df[<span class="st">"egfr"</span>] <span class="op">=</span> df[<span class="st">"egfr"</span>].fillna(df[<span class="st">"egfr"</span>].median())</span>
-<span id="cb27-6"><a href="#cb27-6" aria-hidden="true" tabindex="-1"></a></span>
-<span id="cb27-7"><a href="#cb27-7" aria-hidden="true" tabindex="-1"></a><span class="co"># 3. Verify</span></span>
-<span id="cb27-8"><a href="#cb27-8" aria-hidden="true" tabindex="-1"></a><span class="bu">print</span>(df[<span class="st">"egfr"</span>].isnull().<span class="bu">sum</span>())   <span class="co"># should be 0</span></span>
-<span id="cb27-9"><a href="#cb27-9" aria-hidden="true" tabindex="-1"></a><span class="bu">print</span>(df[<span class="st">"egfr_missing"</span>].value_counts())</span></code><button title="Copy to Clipboard" class="code-copy-button"><i class="bi"></i></button></pre></div>
+<div id="8c619f67" class="cell" data-execution_count="12">
+<div class="sourceCode cell-code" id="cb24"><pre class="sourceCode python code-with-copy"><code class="sourceCode python"><span id="cb24-1"><a href="#cb24-1" aria-hidden="true" tabindex="-1"></a><span class="co"># 1. Flag missingness</span></span>
+<span id="cb24-2"><a href="#cb24-2" aria-hidden="true" tabindex="-1"></a>df[<span class="st">"egfr_missing"</span>] <span class="op">=</span> df[<span class="st">"egfr"</span>].isnull().astype(<span class="bu">int</span>)</span>
+<span id="cb24-3"><a href="#cb24-3" aria-hidden="true" tabindex="-1"></a></span>
+<span id="cb24-4"><a href="#cb24-4" aria-hidden="true" tabindex="-1"></a><span class="co"># 2. Impute with median</span></span>
+<span id="cb24-5"><a href="#cb24-5" aria-hidden="true" tabindex="-1"></a>df[<span class="st">"egfr"</span>] <span class="op">=</span> df[<span class="st">"egfr"</span>].fillna(df[<span class="st">"egfr"</span>].median())</span>
+<span id="cb24-6"><a href="#cb24-6" aria-hidden="true" tabindex="-1"></a></span>
+<span id="cb24-7"><a href="#cb24-7" aria-hidden="true" tabindex="-1"></a><span class="co"># 3. Verify</span></span>
+<span id="cb24-8"><a href="#cb24-8" aria-hidden="true" tabindex="-1"></a><span class="bu">print</span>(df[<span class="st">"egfr"</span>].isnull().<span class="bu">sum</span>())   <span class="co"># should be 0</span></span>
+<span id="cb24-9"><a href="#cb24-9" aria-hidden="true" tabindex="-1"></a><span class="bu">print</span>(df[<span class="st">"egfr_missing"</span>].value_counts())</span></code><button title="Copy to Clipboard" class="code-copy-button"><i class="bi"></i></button></pre></div>
 <div class="cell-output cell-output-stdout">
 <pre><code>0
 egfr_missing
-0    5002
+0    4557
+1     445
 Name: count, dtype: int64</code></pre>
 </div>
+</div>
+</div>
+</div>
+</div>
+<div class="callout callout-style-default callout-note callout-titled">
+<div class="callout-header d-flex align-content-center" data-bs-toggle="collapse" data-bs-target=".callout-7-contents" aria-controls="callout-7" aria-expanded="false" aria-label="Toggle callout">
+<div class="callout-icon-container">
+<i class="callout-icon"></i>
+</div>
+<div class="callout-title-container flex-fill">
+Full data loading and cleaning steps
+</div>
+<div class="callout-btn-toggle d-inline-block border-0 py-1 ps-1 pe-0 float-end"><i class="callout-toggle"></i></div>
+</div>
+<div id="callout-7" class="callout-7-contents callout-collapse collapse">
+<div class="callout-body-container callout-body">
+<div id="c8cc7d89" class="cell" data-execution_count="13">
+<div class="sourceCode cell-code" id="cb26"><pre class="sourceCode python code-with-copy"><code class="sourceCode python"><span id="cb26-1"><a href="#cb26-1" aria-hidden="true" tabindex="-1"></a><span class="im">import</span> pandas <span class="im">as</span> pd</span>
+<span id="cb26-2"><a href="#cb26-2" aria-hidden="true" tabindex="-1"></a><span class="im">import</span> numpy <span class="im">as</span> np</span>
+<span id="cb26-3"><a href="#cb26-3" aria-hidden="true" tabindex="-1"></a></span>
+<span id="cb26-4"><a href="#cb26-4" aria-hidden="true" tabindex="-1"></a>url <span class="op">=</span> <span class="st">"https://raw.githubusercontent.com/Bristol-Training/nhs-data-science/refs/heads/main/data/nhs_readmission.csv"</span></span>
+<span id="cb26-5"><a href="#cb26-5" aria-hidden="true" tabindex="-1"></a></span>
+<span id="cb26-6"><a href="#cb26-6" aria-hidden="true" tabindex="-1"></a>df <span class="op">=</span> pd.read_csv(</span>
+<span id="cb26-7"><a href="#cb26-7" aria-hidden="true" tabindex="-1"></a>    url,</span>
+<span id="cb26-8"><a href="#cb26-8" aria-hidden="true" tabindex="-1"></a>    skiprows<span class="op">=</span><span class="dv">3</span>,</span>
+<span id="cb26-9"><a href="#cb26-9" aria-hidden="true" tabindex="-1"></a>    index_col<span class="op">=</span><span class="st">"patient_id"</span>,</span>
+<span id="cb26-10"><a href="#cb26-10" aria-hidden="true" tabindex="-1"></a>    na_values<span class="op">=</span>[<span class="st">"."</span>, <span class="st">"N/A"</span>, <span class="st">"NULL"</span>, <span class="st">"UNKNOWN"</span>],  <span class="co"># Add this</span></span>
+<span id="cb26-11"><a href="#cb26-11" aria-hidden="true" tabindex="-1"></a>)</span>
+<span id="cb26-12"><a href="#cb26-12" aria-hidden="true" tabindex="-1"></a></span>
+<span id="cb26-13"><a href="#cb26-13" aria-hidden="true" tabindex="-1"></a></span>
+<span id="cb26-14"><a href="#cb26-14" aria-hidden="true" tabindex="-1"></a>df[<span class="st">"egfr_missing"</span>] <span class="op">=</span> df[<span class="st">"egfr"</span>].isnull().astype(<span class="bu">int</span>)</span>
+<span id="cb26-15"><a href="#cb26-15" aria-hidden="true" tabindex="-1"></a>df[<span class="st">"egfr"</span>] <span class="op">=</span> df[<span class="st">"egfr"</span>].fillna(df[<span class="st">"egfr"</span>].median())</span>
+<span id="cb26-16"><a href="#cb26-16" aria-hidden="true" tabindex="-1"></a></span>
+<span id="cb26-17"><a href="#cb26-17" aria-hidden="true" tabindex="-1"></a>bmi_median <span class="op">=</span> df[<span class="st">"bmi"</span>].median()</span>
+<span id="cb26-18"><a href="#cb26-18" aria-hidden="true" tabindex="-1"></a>df[<span class="st">"bmi"</span>] <span class="op">=</span> df[<span class="st">"bmi"</span>].fillna(bmi_median)</span>
+<span id="cb26-19"><a href="#cb26-19" aria-hidden="true" tabindex="-1"></a></span>
+<span id="cb26-20"><a href="#cb26-20" aria-hidden="true" tabindex="-1"></a>ward_mode <span class="op">=</span> df[<span class="st">"discharge_ward"</span>].mode()[<span class="dv">0</span>]</span>
+<span id="cb26-21"><a href="#cb26-21" aria-hidden="true" tabindex="-1"></a>df[<span class="st">"discharge_ward"</span>] <span class="op">=</span> df[<span class="st">"discharge_ward"</span>].fillna(ward_mode)</span>
+<span id="cb26-22"><a href="#cb26-22" aria-hidden="true" tabindex="-1"></a></span>
+<span id="cb26-23"><a href="#cb26-23" aria-hidden="true" tabindex="-1"></a>df[<span class="st">"hba1c_missing"</span>] <span class="op">=</span> df[<span class="st">"hba1c"</span>].isnull().astype(<span class="bu">int</span>)</span>
+<span id="cb26-24"><a href="#cb26-24" aria-hidden="true" tabindex="-1"></a>df[<span class="st">"hba1c"</span>] <span class="op">=</span> df[<span class="st">"hba1c"</span>].fillna(df[<span class="st">"hba1c"</span>].median())</span>
+<span id="cb26-25"><a href="#cb26-25" aria-hidden="true" tabindex="-1"></a></span>
+<span id="cb26-26"><a href="#cb26-26" aria-hidden="true" tabindex="-1"></a>df.dropna(inplace<span class="op">=</span><span class="va">True</span>)</span></code><button title="Copy to Clipboard" class="code-copy-button"><i class="bi"></i></button></pre></div>
 </div>
 </div>
 </div>
@@ -695,7 +725,7 @@ window.document.addEventListener("DOMContentLoaded", function (event) {
   }
     var localhostRegex = new RegExp(/^(?:http|https):\/\/localhost\:?[0-9]*\//);
     var mailtoRegex = new RegExp(/^mailto:/);
-      var filterRegex = new RegExp('/' + window.location.host + '/');
+      var filterRegex = new RegExp("https:\/\/Bristol-Training\.github\.io\/nhs-data-science\/");
     var isInternal = (href) => {
         return filterRegex.test(href) || localhostRegex.test(href) || mailtoRegex.test(href);
     }
