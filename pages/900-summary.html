@@ -7,7 +7,7 @@
 <meta name="viewport" content="width=device-width, initial-scale=1.0, user-scalable=yes">
 
 
-<title>Why Python? – Data Science in Python for Healthcare</title>
+<title>Summary and Resources – Data Science in Python for Healthcare</title>
 <style>
 code{white-space: pre-wrap;}
 span.smallcaps{font-variant: small-caps;}
@@ -20,6 +20,40 @@ ul.task-list li input[type="checkbox"] {
   margin: 0 0.8em 0.2em -1em; /* quarto-specific, see https://github.com/quarto-dev/quarto-cli/issues/4556 */ 
   vertical-align: middle;
 }
+/* CSS for syntax highlighting */
+pre > code.sourceCode { white-space: pre; position: relative; }
+pre > code.sourceCode > span { line-height: 1.25; }
+pre > code.sourceCode > span:empty { height: 1.2em; }
+.sourceCode { overflow: visible; }
+code.sourceCode > span { color: inherit; text-decoration: inherit; }
+div.sourceCode { margin: 1em 0; }
+pre.sourceCode { margin: 0; }
+@media screen {
+div.sourceCode { overflow: auto; }
+}
+@media print {
+pre > code.sourceCode { white-space: pre-wrap; }
+pre > code.sourceCode > span { display: inline-block; text-indent: -5em; padding-left: 5em; }
+}
+pre.numberSource code
+  { counter-reset: source-line 0; }
+pre.numberSource code > span
+  { position: relative; left: -4em; counter-increment: source-line; }
+pre.numberSource code > span > a:first-child::before
+  { content: counter(source-line);
+    position: relative; left: -1em; text-align: right; vertical-align: baseline;
+    border: none; display: inline-block;
+    -webkit-touch-callout: none; -webkit-user-select: none;
+    -khtml-user-select: none; -moz-user-select: none;
+    -ms-user-select: none; user-select: none;
+    padding: 0 4px; width: 4em;
+  }
+pre.numberSource { margin-left: 3em;  padding-left: 4px; }
+div.sourceCode
+  {   }
+@media screen {
+pre > code.sourceCode > span > a:first-child::before { text-decoration: underline; }
+}
 </style>
 
 
@@ -30,8 +64,7 @@ ul.task-list li input[type="checkbox"] {
 <script src="../site_libs/quarto-search/fuse.min.js"></script>
 <script src="../site_libs/quarto-search/quarto-search.js"></script>
 <meta name="quarto:offset" content="../">
-<link href="../pages/001-setup.html" rel="next">
-<link href="../index.html" rel="prev">
+<link href="../pages/032-random-forest.html" rel="prev">
 <script src="../site_libs/quarto-html/quarto.js"></script>
 <script src="../site_libs/quarto-html/popper.min.js"></script>
 <script src="../site_libs/quarto-html/tippy.umd.min.js"></script>
@@ -81,7 +114,7 @@ ul.task-list li input[type="checkbox"] {
       <button type="button" class="quarto-btn-toggle btn" data-bs-toggle="collapse" role="button" data-bs-target=".quarto-sidebar-collapse-item" aria-controls="quarto-sidebar" aria-expanded="false" aria-label="Toggle sidebar navigation" onclick="if (window.quartoToggleHeadroom) { window.quartoToggleHeadroom(); }">
         <i class="bi bi-layout-text-sidebar-reverse"></i>
       </button>
-        <nav class="quarto-page-breadcrumbs" aria-label="breadcrumb"><ol class="breadcrumb"><li class="breadcrumb-item"><a href="../pages/000-why-python.html">Why Python?</a></li></ol></nav>
+        <nav class="quarto-page-breadcrumbs" aria-label="breadcrumb"><ol class="breadcrumb"><li class="breadcrumb-item"><a href="../pages/900-summary.html">Summary and Resources</a></li></ol></nav>
         <a class="flex-grow-1" role="navigation" data-bs-toggle="collapse" data-bs-target=".quarto-sidebar-collapse-item" aria-controls="quarto-sidebar" aria-expanded="false" aria-label="Toggle sidebar navigation" onclick="if (window.quartoToggleHeadroom) { window.quartoToggleHeadroom(); }">      
         </a>
       <button type="button" class="btn quarto-search-button" aria-label="Search" onclick="window.quartoOpenSearch();">
@@ -117,7 +150,7 @@ ul.task-list li input[type="checkbox"] {
 </li>
         <li class="sidebar-item">
   <div class="sidebar-item-container"> 
-  <a href="../pages/000-why-python.html" class="sidebar-item-text sidebar-link active">
+  <a href="../pages/000-why-python.html" class="sidebar-item-text sidebar-link">
  <span class="menu-text">Why Python?</span></a>
   </div>
 </li>
@@ -177,8 +210,8 @@ ul.task-list li input[type="checkbox"] {
 </li>
         <li class="sidebar-item">
   <div class="sidebar-item-container"> 
-  <a href="../pages/900-resources.html" class="sidebar-item-text sidebar-link">
- <span class="menu-text">Resources</span></a>
+  <a href="../pages/900-summary.html" class="sidebar-item-text sidebar-link active">
+ <span class="menu-text">Summary and Resources</span></a>
   </div>
 </li>
     </ul>
@@ -191,7 +224,8 @@ ul.task-list li input[type="checkbox"] {
     <h2 id="toc-title">On this page</h2>
    
   <ul>
-  <li><a href="#python-and-the-nhs-digital-transformation" id="toc-python-and-the-nhs-digital-transformation" class="nav-link active" data-scroll-target="#python-and-the-nhs-digital-transformation">Python and the NHS digital transformation</a></li>
+  <li><a href="#key-code-snippets" id="toc-key-code-snippets" class="nav-link active" data-scroll-target="#key-code-snippets">Key Code Snippets</a></li>
+  <li><a href="#resources-for-further-learning" id="toc-resources-for-further-learning" class="nav-link" data-scroll-target="#resources-for-further-learning">Resources for further learning</a></li>
   </ul>
 </nav>
     </div>
@@ -200,7 +234,7 @@ ul.task-list li input[type="checkbox"] {
 
 <header id="title-block-header" class="quarto-title-block default">
 <div class="quarto-title">
-<h1 class="title">Why Python?</h1>
+<h1 class="title">Summary and Resources</h1>
 </div>
 
 
@@ -217,25 +251,56 @@ ul.task-list li input[type="checkbox"] {
 </header>
 
 
-<p><span class="time-badge">⏱ 5 minutes</span></p>
-<p>Python is a general-purpose programming language first released in 1991. It was designed around a simple philosophy: code should be easy to read, easy to write, and easy to share. Python runs line by line in an interactive environment — which is why it works so naturally inside <em>notebooks</em>, where you can run a single <em>cell</em>, inspect the output, and decide what to do next. Python is free, open-source, and runs on any operating system.</p>
-<p>Over the past decade, Python has become the dominant language for data science and machine learning. Its ecosystem — <code>pandas</code> for data wrangling, <code>scikit-learn</code> for machine learning, <code>matplotlib</code> and <code>seaborn</code> for visualisation, <code>PyTorch</code> and <code>TensorFlow</code> for deep learning — is unmatched in breadth and quality.</p>
-<div id="e539bc20" class="cell" data-execution_count="1">
-<div class="cell-output cell-output-display">
-<div class="quarto-figure quarto-figure-center">
-<figure class="figure">
-<p><img src="000-why-python_files/figure-html/cell-2-output-1.png" alt="Bar chart showing Python as the most used programming language, followed by SQL and R." width="950" height="566" class="figure-img"></p>
-<figcaption>Python’s dominance in data science is reflected in the programming languages used by <a href="https://www.kaggle.com/c/kaggle-survey-2022">2022 Kaggle Machine Learning &amp; Data Science Survey</a> respondents.</figcaption>
-</figure>
+<section id="key-code-snippets" class="level3">
+<h3 class="anchored" data-anchor-id="key-code-snippets">Key Code Snippets</h3>
+<div class="sourceCode" id="cb1"><pre class="sourceCode python code-with-copy"><code class="sourceCode python"><span id="cb1-1"><a href="#cb1-1" aria-hidden="true" tabindex="-1"></a><span class="co"># Load and inspect</span></span>
+<span id="cb1-2"><a href="#cb1-2" aria-hidden="true" tabindex="-1"></a>df <span class="op">=</span> pd.read_csv(<span class="st">"nhs_readmission.csv"</span>)</span>
+<span id="cb1-3"><a href="#cb1-3" aria-hidden="true" tabindex="-1"></a>df.shape<span class="op">;</span> df.dtypes<span class="op">;</span> df.head()<span class="op">;</span> df.describe()<span class="op">;</span> df.isnull().<span class="bu">sum</span>()</span>
+<span id="cb1-4"><a href="#cb1-4" aria-hidden="true" tabindex="-1"></a></span>
+<span id="cb1-5"><a href="#cb1-5" aria-hidden="true" tabindex="-1"></a><span class="co"># Filter</span></span>
+<span id="cb1-6"><a href="#cb1-6" aria-hidden="true" tabindex="-1"></a>elderly_dm <span class="op">=</span> df[(df[<span class="st">"age"</span>] <span class="op">&gt;</span> <span class="dv">65</span>) <span class="op">&amp;</span> (df[<span class="st">"primary_diagnosis"</span>] <span class="op">==</span> <span class="st">"E11"</span>)]</span>
+<span id="cb1-7"><a href="#cb1-7" aria-hidden="true" tabindex="-1"></a></span>
+<span id="cb1-8"><a href="#cb1-8" aria-hidden="true" tabindex="-1"></a><span class="co"># Missing data — indicator + impute</span></span>
+<span id="cb1-9"><a href="#cb1-9" aria-hidden="true" tabindex="-1"></a>df[<span class="st">"hba1c_missing"</span>] <span class="op">=</span> df[<span class="st">"hba1c"</span>].isnull().astype(<span class="bu">int</span>)</span>
+<span id="cb1-10"><a href="#cb1-10" aria-hidden="true" tabindex="-1"></a>df[<span class="st">"hba1c"</span>] <span class="op">=</span> df[<span class="st">"hba1c"</span>].fillna(df[<span class="st">"hba1c"</span>].median())</span>
+<span id="cb1-11"><a href="#cb1-11" aria-hidden="true" tabindex="-1"></a></span>
+<span id="cb1-12"><a href="#cb1-12" aria-hidden="true" tabindex="-1"></a><span class="co"># Train / test split</span></span>
+<span id="cb1-13"><a href="#cb1-13" aria-hidden="true" tabindex="-1"></a>X_train, X_test, y_train, y_test <span class="op">=</span> train_test_split(</span>
+<span id="cb1-14"><a href="#cb1-14" aria-hidden="true" tabindex="-1"></a>    X, y, test_size<span class="op">=</span><span class="fl">0.2</span>, random_state<span class="op">=</span><span class="dv">42</span>, stratify<span class="op">=</span>y)</span>
+<span id="cb1-15"><a href="#cb1-15" aria-hidden="true" tabindex="-1"></a></span>
+<span id="cb1-16"><a href="#cb1-16" aria-hidden="true" tabindex="-1"></a><span class="co"># Logistic regression</span></span>
+<span id="cb1-17"><a href="#cb1-17" aria-hidden="true" tabindex="-1"></a>lr <span class="op">=</span> LogisticRegression(class_weight<span class="op">=</span><span class="st">"balanced"</span>)</span>
+<span id="cb1-18"><a href="#cb1-18" aria-hidden="true" tabindex="-1"></a>lr.fit(X_train_s, y_train)</span>
+<span id="cb1-19"><a href="#cb1-19" aria-hidden="true" tabindex="-1"></a>y_prob <span class="op">=</span> lr.predict_proba(X_test_s)[:, <span class="dv">1</span>]</span>
+<span id="cb1-20"><a href="#cb1-20" aria-hidden="true" tabindex="-1"></a><span class="bu">print</span>(<span class="ss">f"AUC: </span><span class="sc">{</span>roc_auc_score(y_test, y_prob)<span class="sc">:.3f}</span><span class="ss">"</span>)</span>
+<span id="cb1-21"><a href="#cb1-21" aria-hidden="true" tabindex="-1"></a></span>
+<span id="cb1-22"><a href="#cb1-22" aria-hidden="true" tabindex="-1"></a><span class="co"># Random Forest</span></span>
+<span id="cb1-23"><a href="#cb1-23" aria-hidden="true" tabindex="-1"></a>rf <span class="op">=</span> RandomForestClassifier(n_estimators<span class="op">=</span><span class="dv">300</span>, max_depth<span class="op">=</span><span class="dv">8</span>, class_weight<span class="op">=</span><span class="st">"balanced"</span>)</span>
+<span id="cb1-24"><a href="#cb1-24" aria-hidden="true" tabindex="-1"></a>rf.fit(X_train, y_train)</span>
+<span id="cb1-25"><a href="#cb1-25" aria-hidden="true" tabindex="-1"></a></span>
+<span id="cb1-26"><a href="#cb1-26" aria-hidden="true" tabindex="-1"></a><span class="co"># Feature importance</span></span>
+<span id="cb1-27"><a href="#cb1-27" aria-hidden="true" tabindex="-1"></a>pd.Series(rf.feature_importances_, index<span class="op">=</span>X.columns).sort_values().plot(kind<span class="op">=</span><span class="st">"barh"</span>)</span></code><button title="Copy to Clipboard" class="code-copy-button"><i class="bi"></i></button></pre></div>
+<div class="callout callout-style-default callout-warning callout-titled">
+<div class="callout-header d-flex align-content-center">
+<div class="callout-icon-container">
+<i class="callout-icon"></i>
+</div>
+<div class="callout-title-container flex-fill">
+A note on AI in the NHS
 </div>
 </div>
+<div class="callout-body-container callout-body">
+<p>Building a model that works on training data is the easy part. Deploying it safely — so that it improves outcomes rather than causing harm through automation bias, fairness failures, or poor calibration — requires multidisciplinary collaboration between clinicians, data scientists, information governance leads, and patients.</p>
+<p>The <a href="https://www.nhsx.nhs.uk/ai-lab/">NHS AI Ethics Initiative</a> and <a href="https://www.turing.ac.uk/research/research-projects/understanding-accountability-ai">Alan Turing Institute’s guidance</a> are good starting points for understanding responsible deployment.</p>
 </div>
-<section id="python-and-the-nhs-digital-transformation" class="level3">
-<h3 class="anchored" data-anchor-id="python-and-the-nhs-digital-transformation">Python and the NHS digital transformation</h3>
-<p>The NHS is in the middle of a substantial digital transformation, and Python has become the de facto language of NHS England’s data science function. NHS England publishes its own data science work as open Python code on GitHub, and the <a href="https://nhsengland.github.io/datascience/">NHS England Data Science team</a> explicitly positions Python as its primary language for analytical and machine learning work.</p>
-<p>Also, NHS England has recognised that clinical staff — not just specialist data scientists — need these skills. The NHS Clinical Data Science Programme, funded by NHS England since 2023 with growing cohorts in 2024 and 2025, aims to empower healthcare professionals from across the health and social care workforce to apply data science in practice and translate data into patient benefit.</p>
-<p>The skills you will build in this course — <code>pandas</code> for data wrangling, <code>scikit-learn</code> for machine learning, <code>seaborn</code> for visualisation — are the skills listed in health data science job specifications, clinical informatics fellowships, and applied health research postdoctoral positions. They are also the foundation for deep learning and modern AI.</p>
-<p>That is why we start here.</p>
+</div>
+</section>
+<section id="resources-for-further-learning" class="level3">
+<h3 class="anchored" data-anchor-id="resources-for-further-learning">Resources for further learning</h3>
+<p><strong>Python basics</strong></p>
+<p><a href="https://bristol-training.github.io/intro-python-1/" class="uri">https://bristol-training.github.io/intro-python-1/</a> <a href="https://bristol-training.github.io/intro-python-2/" class="uri">https://bristol-training.github.io/intro-python-2/</a></p>
+<p><strong>Pandas and Seaborn</strong> <a href="https://bristol-training.github.io/data-science-python-1/" class="uri">https://bristol-training.github.io/data-science-python-1/</a></p>
+<p><strong>Scikit-learn and machine learning</strong> <a href="https://bristol-training.github.io/data-science-python-2/" class="uri">https://bristol-training.github.io/data-science-python-2/</a> <a href="https://bristol-training.github.io/decision-tree-random-forest/" class="uri">https://bristol-training.github.io/decision-tree-random-forest/</a></p>
 
 
 </section>
@@ -333,7 +398,7 @@ window.document.addEventListener("DOMContentLoaded", function (event) {
   }
     var localhostRegex = new RegExp(/^(?:http|https):\/\/localhost\:?[0-9]*\//);
     var mailtoRegex = new RegExp(/^mailto:/);
-      var filterRegex = new RegExp("https:\/\/Bristol-Training\.github\.io\/nhs-data-science\/");
+      var filterRegex = new RegExp('/' + window.location.host + '/');
     var isInternal = (href) => {
         return filterRegex.test(href) || localhostRegex.test(href) || mailtoRegex.test(href);
     }
@@ -663,14 +728,11 @@ window.document.addEventListener("DOMContentLoaded", function (event) {
 </script>
 <nav class="page-navigation">
   <div class="nav-page nav-page-previous">
-      <a href="../index.html" class="pagination-link" aria-label="Introduction">
-        <i class="bi bi-arrow-left-short"></i> <span class="nav-page-text">Introduction</span>
+      <a href="../pages/032-random-forest.html" class="pagination-link" aria-label="Random Forest">
+        <i class="bi bi-arrow-left-short"></i> <span class="nav-page-text">Random Forest</span>
       </a>          
   </div>
   <div class="nav-page nav-page-next">
-      <a href="../pages/001-setup.html" class="pagination-link" aria-label="Workspace Setup">
-        <span class="nav-page-text">Workspace Setup</span> <i class="bi bi-arrow-right-short"></i>
-      </a>
   </div>
 </nav>
 </div> <!-- /content -->

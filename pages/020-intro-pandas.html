@@ -193,8 +193,8 @@ pre > code.sourceCode > span > a:first-child::before { text-decoration: underlin
 </li>
         <li class="sidebar-item">
   <div class="sidebar-item-container"> 
-  <a href="../pages/030-ml-concepts.html" class="sidebar-item-text sidebar-link">
- <span class="menu-text">Machine Learning Concepts</span></a>
+  <a href="../pages/030-machine-learning.html" class="sidebar-item-text sidebar-link">
+ <span class="menu-text">Machine Learning</span></a>
   </div>
 </li>
         <li class="sidebar-item">
@@ -211,14 +211,8 @@ pre > code.sourceCode > span > a:first-child::before { text-decoration: underlin
 </li>
         <li class="sidebar-item">
   <div class="sidebar-item-container"> 
-  <a href="../pages/901-summary.html" class="sidebar-item-text sidebar-link">
- <span class="menu-text">Summary</span></a>
-  </div>
-</li>
-        <li class="sidebar-item">
-  <div class="sidebar-item-container"> 
-  <a href="../pages/902-next-steps.html" class="sidebar-item-text sidebar-link">
- <span class="menu-text">What’s Next?</span></a>
+  <a href="../pages/900-resources.html" class="sidebar-item-text sidebar-link">
+ <span class="menu-text">Resources</span></a>
   </div>
 </li>
     </ul>
@@ -267,7 +261,7 @@ pre > code.sourceCode > span > a:first-child::before { text-decoration: underlin
 <section id="the-dataframe" class="level3">
 <h3 class="anchored" data-anchor-id="the-dataframe">The DataFrame</h3>
 <p>The core pandas object (data structure) is the <strong>DataFrame</strong> — a two-dimensional table with labelled rows and columns.</p>
-<div id="4ee79e86" class="cell" data-execution_count="1">
+<div id="dafabd11" class="cell" data-execution_count="1">
 <div class="sourceCode cell-code" id="cb1"><pre class="sourceCode python code-with-copy"><code class="sourceCode python"><span id="cb1-1"><a href="#cb1-1" aria-hidden="true" tabindex="-1"></a><span class="im">import</span> pandas <span class="im">as</span> pd</span>
 <span id="cb1-2"><a href="#cb1-2" aria-hidden="true" tabindex="-1"></a></span>
 <span id="cb1-3"><a href="#cb1-3" aria-hidden="true" tabindex="-1"></a><span class="co"># A minimal patient DataFrame built from a dictionary</span></span>
@@ -290,19 +284,14 @@ pre > code.sourceCode > span > a:first-child::before { text-decoration: underlin
 3       P004   55   M       E11   84.0       False</code></pre>
 </div>
 </div>
-<pre><code>  patient_id  age sex diagnosis  hba1c  readmitted
-0       P001   67   M       E11   71.0        True
-1       P002   45   F       I10    NaN       False
-2       P003   82   F       J44   58.0        True
-3       P004   55   M       E11   84.0       False</code></pre>
 </section>
 <section id="accessing-columns" class="level3">
 <h3 class="anchored" data-anchor-id="accessing-columns">Accessing Columns</h3>
 <p>Select a single column using square brackets — this returns a <strong>Series</strong>:</p>
-<div id="21ee262b" class="cell" data-execution_count="2">
-<div class="sourceCode cell-code" id="cb4"><pre class="sourceCode python code-with-copy"><code class="sourceCode python"><span id="cb4-1"><a href="#cb4-1" aria-hidden="true" tabindex="-1"></a>ages <span class="op">=</span> df[<span class="st">"age"</span>]</span>
-<span id="cb4-2"><a href="#cb4-2" aria-hidden="true" tabindex="-1"></a><span class="bu">print</span>(ages)</span>
-<span id="cb4-3"><a href="#cb4-3" aria-hidden="true" tabindex="-1"></a><span class="bu">print</span>(<span class="bu">type</span>(ages))</span></code><button title="Copy to Clipboard" class="code-copy-button"><i class="bi"></i></button></pre></div>
+<div id="b11424f9" class="cell" data-execution_count="2">
+<div class="sourceCode cell-code" id="cb3"><pre class="sourceCode python code-with-copy"><code class="sourceCode python"><span id="cb3-1"><a href="#cb3-1" aria-hidden="true" tabindex="-1"></a>ages <span class="op">=</span> df[<span class="st">"age"</span>]</span>
+<span id="cb3-2"><a href="#cb3-2" aria-hidden="true" tabindex="-1"></a><span class="bu">print</span>(ages)</span>
+<span id="cb3-3"><a href="#cb3-3" aria-hidden="true" tabindex="-1"></a><span class="bu">print</span>(<span class="bu">type</span>(ages))</span></code><button title="Copy to Clipboard" class="code-copy-button"><i class="bi"></i></button></pre></div>
 <div class="cell-output cell-output-stdout">
 <pre><code>0    67
 1    45
@@ -313,9 +302,9 @@ Name: age, dtype: int64
 </div>
 </div>
 <p>Select multiple columns by passing a list of names — this returns a <strong>DataFrame</strong>:</p>
-<div id="92f72c79" class="cell" data-execution_count="3">
-<div class="sourceCode cell-code" id="cb6"><pre class="sourceCode python code-with-copy"><code class="sourceCode python"><span id="cb6-1"><a href="#cb6-1" aria-hidden="true" tabindex="-1"></a>demographics <span class="op">=</span> df[[<span class="st">"patient_id"</span>, <span class="st">"age"</span>, <span class="st">"sex"</span>]]</span>
-<span id="cb6-2"><a href="#cb6-2" aria-hidden="true" tabindex="-1"></a><span class="bu">print</span>(demographics)</span></code><button title="Copy to Clipboard" class="code-copy-button"><i class="bi"></i></button></pre></div>
+<div id="aca90c53" class="cell" data-execution_count="3">
+<div class="sourceCode cell-code" id="cb5"><pre class="sourceCode python code-with-copy"><code class="sourceCode python"><span id="cb5-1"><a href="#cb5-1" aria-hidden="true" tabindex="-1"></a>demographics <span class="op">=</span> df[[<span class="st">"patient_id"</span>, <span class="st">"age"</span>, <span class="st">"sex"</span>]]</span>
+<span id="cb5-2"><a href="#cb5-2" aria-hidden="true" tabindex="-1"></a><span class="bu">print</span>(demographics)</span></code><button title="Copy to Clipboard" class="code-copy-button"><i class="bi"></i></button></pre></div>
 <div class="cell-output cell-output-stdout">
 <pre><code>  patient_id  age sex
 0       P001   67   M
@@ -328,10 +317,10 @@ Name: age, dtype: int64
 <section id="creating-columns" class="level3">
 <h3 class="anchored" data-anchor-id="creating-columns">Creating Columns</h3>
 <p>Assign to a new column name to add it to the DataFrame. The value can be a constant, a calculation on existing columns, or a condition:</p>
-<div id="6d6b727e" class="cell" data-execution_count="4">
-<div class="sourceCode cell-code" id="cb8"><pre class="sourceCode python code-with-copy"><code class="sourceCode python"><span id="cb8-1"><a href="#cb8-1" aria-hidden="true" tabindex="-1"></a>df[<span class="st">"age_over_65"</span>] <span class="op">=</span> df[<span class="st">"age"</span>] <span class="op">&gt;</span> <span class="dv">65</span></span>
-<span id="cb8-2"><a href="#cb8-2" aria-hidden="true" tabindex="-1"></a>df[<span class="st">"hba1c_above_target"</span>] <span class="op">=</span> df[<span class="st">"hba1c"</span>] <span class="op">-</span> <span class="dv">48</span>  <span class="co"># target threshold: 48 mmol/mol</span></span>
-<span id="cb8-3"><a href="#cb8-3" aria-hidden="true" tabindex="-1"></a><span class="bu">print</span>(df[[<span class="st">"patient_id"</span>, <span class="st">"age"</span>, <span class="st">"age_over_65"</span>, <span class="st">"hba1c"</span>, <span class="st">"hba1c_above_target"</span>]])</span></code><button title="Copy to Clipboard" class="code-copy-button"><i class="bi"></i></button></pre></div>
+<div id="5f4caef3" class="cell" data-execution_count="4">
+<div class="sourceCode cell-code" id="cb7"><pre class="sourceCode python code-with-copy"><code class="sourceCode python"><span id="cb7-1"><a href="#cb7-1" aria-hidden="true" tabindex="-1"></a>df[<span class="st">"age_over_65"</span>] <span class="op">=</span> df[<span class="st">"age"</span>] <span class="op">&gt;</span> <span class="dv">65</span></span>
+<span id="cb7-2"><a href="#cb7-2" aria-hidden="true" tabindex="-1"></a>df[<span class="st">"hba1c_above_target"</span>] <span class="op">=</span> df[<span class="st">"hba1c"</span>] <span class="op">-</span> <span class="dv">48</span>  <span class="co"># target threshold: 48 mmol/mol</span></span>
+<span id="cb7-3"><a href="#cb7-3" aria-hidden="true" tabindex="-1"></a><span class="bu">print</span>(df[[<span class="st">"patient_id"</span>, <span class="st">"age"</span>, <span class="st">"age_over_65"</span>, <span class="st">"hba1c"</span>, <span class="st">"hba1c_above_target"</span>]])</span></code><button title="Copy to Clipboard" class="code-copy-button"><i class="bi"></i></button></pre></div>
 <div class="cell-output cell-output-stdout">
 <pre><code>  patient_id  age  age_over_65  hba1c  hba1c_above_target
 0       P001   67         True   71.0                23.0
@@ -344,14 +333,14 @@ Name: age, dtype: int64
 <section id="quick-inspection-methods" class="level3">
 <h3 class="anchored" data-anchor-id="quick-inspection-methods">Quick Inspection Methods</h3>
 <p>When you first receive a dataset, you can use these four commands to quickly understand its structure and contents:</p>
-<div id="d2e995af" class="cell" data-execution_count="5">
-<div class="sourceCode cell-code" id="cb10"><pre class="sourceCode python code-with-copy"><code class="sourceCode python"><span id="cb10-1"><a href="#cb10-1" aria-hidden="true" tabindex="-1"></a><span class="bu">print</span>(df.shape)           <span class="co"># (rows, columns)</span></span></code><button title="Copy to Clipboard" class="code-copy-button"><i class="bi"></i></button></pre></div>
+<div id="1c7f4405" class="cell" data-execution_count="5">
+<div class="sourceCode cell-code" id="cb9"><pre class="sourceCode python code-with-copy"><code class="sourceCode python"><span id="cb9-1"><a href="#cb9-1" aria-hidden="true" tabindex="-1"></a><span class="bu">print</span>(df.shape)           <span class="co"># (rows, columns)</span></span></code><button title="Copy to Clipboard" class="code-copy-button"><i class="bi"></i></button></pre></div>
 <div class="cell-output cell-output-stdout">
 <pre><code>(4, 8)</code></pre>
 </div>
 </div>
-<div id="4dad52fd" class="cell" data-execution_count="6">
-<div class="sourceCode cell-code" id="cb12"><pre class="sourceCode python code-with-copy"><code class="sourceCode python"><span id="cb12-1"><a href="#cb12-1" aria-hidden="true" tabindex="-1"></a><span class="bu">print</span>(df.dtypes)          <span class="co"># data type of each column</span></span></code><button title="Copy to Clipboard" class="code-copy-button"><i class="bi"></i></button></pre></div>
+<div id="e9a41227" class="cell" data-execution_count="6">
+<div class="sourceCode cell-code" id="cb11"><pre class="sourceCode python code-with-copy"><code class="sourceCode python"><span id="cb11-1"><a href="#cb11-1" aria-hidden="true" tabindex="-1"></a><span class="bu">print</span>(df.dtypes)          <span class="co"># data type of each column</span></span></code><button title="Copy to Clipboard" class="code-copy-button"><i class="bi"></i></button></pre></div>
 <div class="cell-output cell-output-stdout">
 <pre><code>patient_id             object
 age                     int64
@@ -364,8 +353,8 @@ hba1c_above_target    float64
 dtype: object</code></pre>
 </div>
 </div>
-<div id="df07ac76" class="cell" data-execution_count="7">
-<div class="sourceCode cell-code" id="cb14"><pre class="sourceCode python code-with-copy"><code class="sourceCode python"><span id="cb14-1"><a href="#cb14-1" aria-hidden="true" tabindex="-1"></a><span class="bu">print</span>(df.head())          <span class="co"># first 5 rows</span></span></code><button title="Copy to Clipboard" class="code-copy-button"><i class="bi"></i></button></pre></div>
+<div id="e3ec2812" class="cell" data-execution_count="7">
+<div class="sourceCode cell-code" id="cb13"><pre class="sourceCode python code-with-copy"><code class="sourceCode python"><span id="cb13-1"><a href="#cb13-1" aria-hidden="true" tabindex="-1"></a><span class="bu">print</span>(df.head())          <span class="co"># first 5 rows</span></span></code><button title="Copy to Clipboard" class="code-copy-button"><i class="bi"></i></button></pre></div>
 <div class="cell-output cell-output-stdout">
 <pre><code>  patient_id  age sex diagnosis  hba1c  readmitted  age_over_65  \
 0       P001   67   M       E11   71.0        True         True   
@@ -380,8 +369,8 @@ dtype: object</code></pre>
 3                36.0  </code></pre>
 </div>
 </div>
-<div id="f8c129c9" class="cell" data-execution_count="8">
-<div class="sourceCode cell-code" id="cb16"><pre class="sourceCode python code-with-copy"><code class="sourceCode python"><span id="cb16-1"><a href="#cb16-1" aria-hidden="true" tabindex="-1"></a><span class="bu">print</span>(df.describe())    <span class="co"># summary statistics for numeric columns</span></span></code><button title="Copy to Clipboard" class="code-copy-button"><i class="bi"></i></button></pre></div>
+<div id="b147bfa4" class="cell" data-execution_count="8">
+<div class="sourceCode cell-code" id="cb15"><pre class="sourceCode python code-with-copy"><code class="sourceCode python"><span id="cb15-1"><a href="#cb15-1" aria-hidden="true" tabindex="-1"></a><span class="bu">print</span>(df.describe())    <span class="co"># summary statistics for numeric columns</span></span></code><button title="Copy to Clipboard" class="code-copy-button"><i class="bi"></i></button></pre></div>
 <div class="cell-output cell-output-stdout">
 <pre><code>             age  hba1c  hba1c_above_target
 count   4.000000    3.0                 3.0
@@ -399,10 +388,10 @@ max    82.000000   84.0                36.0</code></pre>
 <section id="series-operations" class="level3">
 <h3 class="anchored" data-anchor-id="series-operations">Series Operations</h3>
 <p>A Series supports vectorised operations — you apply a function to every element at once. They use optimised C code under the hood, making them much faster than Python <code>for</code> loops. For large datasets with hundreds of thousands of rows, this matters.</p>
-<div id="9bc7fe00" class="cell" data-execution_count="9">
-<div class="sourceCode cell-code" id="cb18"><pre class="sourceCode python code-with-copy"><code class="sourceCode python"><span id="cb18-1"><a href="#cb18-1" aria-hidden="true" tabindex="-1"></a><span class="co"># Classify each patient's age in a single line</span></span>
-<span id="cb18-2"><a href="#cb18-2" aria-hidden="true" tabindex="-1"></a>age_over_65 <span class="op">=</span> df[<span class="st">"age"</span>] <span class="op">&gt;</span> <span class="dv">65</span></span>
-<span id="cb18-3"><a href="#cb18-3" aria-hidden="true" tabindex="-1"></a><span class="bu">print</span>(age_over_65)</span></code><button title="Copy to Clipboard" class="code-copy-button"><i class="bi"></i></button></pre></div>
+<div id="c1dd341d" class="cell" data-execution_count="9">
+<div class="sourceCode cell-code" id="cb17"><pre class="sourceCode python code-with-copy"><code class="sourceCode python"><span id="cb17-1"><a href="#cb17-1" aria-hidden="true" tabindex="-1"></a><span class="co"># Classify each patient's age in a single line</span></span>
+<span id="cb17-2"><a href="#cb17-2" aria-hidden="true" tabindex="-1"></a>age_over_65 <span class="op">=</span> df[<span class="st">"age"</span>] <span class="op">&gt;</span> <span class="dv">65</span></span>
+<span id="cb17-3"><a href="#cb17-3" aria-hidden="true" tabindex="-1"></a><span class="bu">print</span>(age_over_65)</span></code><button title="Copy to Clipboard" class="code-copy-button"><i class="bi"></i></button></pre></div>
 <div class="cell-output cell-output-stdout">
 <pre><code>0     True
 1    False
@@ -411,50 +400,45 @@ max    82.000000   84.0                36.0</code></pre>
 Name: age, dtype: bool</code></pre>
 </div>
 </div>
-<pre><code>0     True
-1    False
-2     True
-3    False
-Name: age, dtype: bool</code></pre>
 <p>Common Series methods:</p>
-<div id="3b79d77a" class="cell" data-execution_count="10">
-<div class="sourceCode cell-code" id="cb21"><pre class="sourceCode python code-with-copy"><code class="sourceCode python"><span id="cb21-1"><a href="#cb21-1" aria-hidden="true" tabindex="-1"></a>df[<span class="st">"age"</span>].mean()      <span class="co"># average age</span></span></code><button title="Copy to Clipboard" class="code-copy-button"><i class="bi"></i></button></pre></div>
+<div id="4da6a8b2" class="cell" data-execution_count="10">
+<div class="sourceCode cell-code" id="cb19"><pre class="sourceCode python code-with-copy"><code class="sourceCode python"><span id="cb19-1"><a href="#cb19-1" aria-hidden="true" tabindex="-1"></a>df[<span class="st">"age"</span>].mean()      <span class="co"># average age</span></span></code><button title="Copy to Clipboard" class="code-copy-button"><i class="bi"></i></button></pre></div>
 <div class="cell-output cell-output-display" data-execution_count="10">
 <pre><code>np.float64(62.25)</code></pre>
 </div>
 </div>
-<div id="5e150e60" class="cell" data-execution_count="11">
-<div class="sourceCode cell-code" id="cb23"><pre class="sourceCode python code-with-copy"><code class="sourceCode python"><span id="cb23-1"><a href="#cb23-1" aria-hidden="true" tabindex="-1"></a>df[<span class="st">"age"</span>].median()    <span class="co"># median age</span></span></code><button title="Copy to Clipboard" class="code-copy-button"><i class="bi"></i></button></pre></div>
+<div id="6f46b25d" class="cell" data-execution_count="11">
+<div class="sourceCode cell-code" id="cb21"><pre class="sourceCode python code-with-copy"><code class="sourceCode python"><span id="cb21-1"><a href="#cb21-1" aria-hidden="true" tabindex="-1"></a>df[<span class="st">"age"</span>].median()    <span class="co"># median age</span></span></code><button title="Copy to Clipboard" class="code-copy-button"><i class="bi"></i></button></pre></div>
 <div class="cell-output cell-output-display" data-execution_count="11">
-<pre><code>61.0</code></pre>
+<pre><code>np.float64(61.0)</code></pre>
 </div>
 </div>
-<div id="755d6812" class="cell" data-execution_count="12">
-<div class="sourceCode cell-code" id="cb25"><pre class="sourceCode python code-with-copy"><code class="sourceCode python"><span id="cb25-1"><a href="#cb25-1" aria-hidden="true" tabindex="-1"></a>df[<span class="st">"age"</span>].std()       <span class="co"># standard deviation</span></span></code><button title="Copy to Clipboard" class="code-copy-button"><i class="bi"></i></button></pre></div>
+<div id="ca3c86dd" class="cell" data-execution_count="12">
+<div class="sourceCode cell-code" id="cb23"><pre class="sourceCode python code-with-copy"><code class="sourceCode python"><span id="cb23-1"><a href="#cb23-1" aria-hidden="true" tabindex="-1"></a>df[<span class="st">"age"</span>].std()       <span class="co"># standard deviation</span></span></code><button title="Copy to Clipboard" class="code-copy-button"><i class="bi"></i></button></pre></div>
 <div class="cell-output cell-output-display" data-execution_count="12">
-<pre><code>15.945218719101975</code></pre>
+<pre><code>np.float64(15.945218719101975)</code></pre>
 </div>
 </div>
-<div id="6dac80d8" class="cell" data-execution_count="13">
-<div class="sourceCode cell-code" id="cb27"><pre class="sourceCode python code-with-copy"><code class="sourceCode python"><span id="cb27-1"><a href="#cb27-1" aria-hidden="true" tabindex="-1"></a>df[<span class="st">"age"</span>].<span class="bu">min</span>()       <span class="co"># minimum</span></span></code><button title="Copy to Clipboard" class="code-copy-button"><i class="bi"></i></button></pre></div>
+<div id="791148a7" class="cell" data-execution_count="13">
+<div class="sourceCode cell-code" id="cb25"><pre class="sourceCode python code-with-copy"><code class="sourceCode python"><span id="cb25-1"><a href="#cb25-1" aria-hidden="true" tabindex="-1"></a>df[<span class="st">"age"</span>].<span class="bu">min</span>()       <span class="co"># minimum</span></span></code><button title="Copy to Clipboard" class="code-copy-button"><i class="bi"></i></button></pre></div>
 <div class="cell-output cell-output-display" data-execution_count="13">
-<pre><code>45</code></pre>
+<pre><code>np.int64(45)</code></pre>
 </div>
 </div>
-<div id="76c8e89b" class="cell" data-execution_count="14">
-<div class="sourceCode cell-code" id="cb29"><pre class="sourceCode python code-with-copy"><code class="sourceCode python"><span id="cb29-1"><a href="#cb29-1" aria-hidden="true" tabindex="-1"></a>df[<span class="st">"age"</span>].<span class="bu">max</span>()       <span class="co"># maximum</span></span></code><button title="Copy to Clipboard" class="code-copy-button"><i class="bi"></i></button></pre></div>
+<div id="2cb22348" class="cell" data-execution_count="14">
+<div class="sourceCode cell-code" id="cb27"><pre class="sourceCode python code-with-copy"><code class="sourceCode python"><span id="cb27-1"><a href="#cb27-1" aria-hidden="true" tabindex="-1"></a>df[<span class="st">"age"</span>].<span class="bu">max</span>()       <span class="co"># maximum</span></span></code><button title="Copy to Clipboard" class="code-copy-button"><i class="bi"></i></button></pre></div>
 <div class="cell-output cell-output-display" data-execution_count="14">
-<pre><code>82</code></pre>
+<pre><code>np.int64(82)</code></pre>
 </div>
 </div>
-<div id="b223813b" class="cell" data-execution_count="15">
-<div class="sourceCode cell-code" id="cb31"><pre class="sourceCode python code-with-copy"><code class="sourceCode python"><span id="cb31-1"><a href="#cb31-1" aria-hidden="true" tabindex="-1"></a>df[<span class="st">"hba1c"</span>].count()   <span class="co"># non-missing count</span></span></code><button title="Copy to Clipboard" class="code-copy-button"><i class="bi"></i></button></pre></div>
+<div id="0ed5cbfc" class="cell" data-execution_count="15">
+<div class="sourceCode cell-code" id="cb29"><pre class="sourceCode python code-with-copy"><code class="sourceCode python"><span id="cb29-1"><a href="#cb29-1" aria-hidden="true" tabindex="-1"></a>df[<span class="st">"hba1c"</span>].count()   <span class="co"># non-missing count</span></span></code><button title="Copy to Clipboard" class="code-copy-button"><i class="bi"></i></button></pre></div>
 <div class="cell-output cell-output-display" data-execution_count="15">
 <pre><code>np.int64(3)</code></pre>
 </div>
 </div>
-<div id="ff01fd94" class="cell" data-execution_count="16">
-<div class="sourceCode cell-code" id="cb33"><pre class="sourceCode python code-with-copy"><code class="sourceCode python"><span id="cb33-1"><a href="#cb33-1" aria-hidden="true" tabindex="-1"></a>df[<span class="st">"sex"</span>].value_counts()  <span class="co"># frequency of each category</span></span></code><button title="Copy to Clipboard" class="code-copy-button"><i class="bi"></i></button></pre></div>
+<div id="5fba8d6b" class="cell" data-execution_count="16">
+<div class="sourceCode cell-code" id="cb31"><pre class="sourceCode python code-with-copy"><code class="sourceCode python"><span id="cb31-1"><a href="#cb31-1" aria-hidden="true" tabindex="-1"></a>df[<span class="st">"sex"</span>].value_counts()  <span class="co"># frequency of each category</span></span></code><button title="Copy to Clipboard" class="code-copy-button"><i class="bi"></i></button></pre></div>
 <div class="cell-output cell-output-display" data-execution_count="16">
 <pre><code>sex
 M    2
@@ -492,15 +476,15 @@ Answer
 </div>
 <div id="callout-2" class="callout-2-contents callout-collapse collapse">
 <div class="callout-body-container callout-body">
-<div id="08c94e2f" class="cell" data-execution_count="17">
-<div class="sourceCode cell-code" id="cb35"><pre class="sourceCode python code-with-copy"><code class="sourceCode python"><span id="cb35-1"><a href="#cb35-1" aria-hidden="true" tabindex="-1"></a><span class="co"># 1.</span></span>
-<span id="cb35-2"><a href="#cb35-2" aria-hidden="true" tabindex="-1"></a><span class="bu">print</span>(df[<span class="st">"diagnosis"</span>])</span>
-<span id="cb35-3"><a href="#cb35-3" aria-hidden="true" tabindex="-1"></a></span>
-<span id="cb35-4"><a href="#cb35-4" aria-hidden="true" tabindex="-1"></a><span class="co"># 2.</span></span>
-<span id="cb35-5"><a href="#cb35-5" aria-hidden="true" tabindex="-1"></a><span class="bu">print</span>(df[[<span class="st">"age"</span>, <span class="st">"readmitted"</span>]])</span>
-<span id="cb35-6"><a href="#cb35-6" aria-hidden="true" tabindex="-1"></a></span>
-<span id="cb35-7"><a href="#cb35-7" aria-hidden="true" tabindex="-1"></a><span class="co"># 3.</span></span>
-<span id="cb35-8"><a href="#cb35-8" aria-hidden="true" tabindex="-1"></a><span class="bu">print</span>(df[<span class="st">"age"</span>].mean())   <span class="co"># 62.25</span></span></code><button title="Copy to Clipboard" class="code-copy-button"><i class="bi"></i></button></pre></div>
+<div id="fdac111e" class="cell" data-execution_count="17">
+<div class="sourceCode cell-code" id="cb33"><pre class="sourceCode python code-with-copy"><code class="sourceCode python"><span id="cb33-1"><a href="#cb33-1" aria-hidden="true" tabindex="-1"></a><span class="co"># 1.</span></span>
+<span id="cb33-2"><a href="#cb33-2" aria-hidden="true" tabindex="-1"></a><span class="bu">print</span>(df[<span class="st">"diagnosis"</span>])</span>
+<span id="cb33-3"><a href="#cb33-3" aria-hidden="true" tabindex="-1"></a></span>
+<span id="cb33-4"><a href="#cb33-4" aria-hidden="true" tabindex="-1"></a><span class="co"># 2.</span></span>
+<span id="cb33-5"><a href="#cb33-5" aria-hidden="true" tabindex="-1"></a><span class="bu">print</span>(df[[<span class="st">"age"</span>, <span class="st">"readmitted"</span>]])</span>
+<span id="cb33-6"><a href="#cb33-6" aria-hidden="true" tabindex="-1"></a></span>
+<span id="cb33-7"><a href="#cb33-7" aria-hidden="true" tabindex="-1"></a><span class="co"># 3.</span></span>
+<span id="cb33-8"><a href="#cb33-8" aria-hidden="true" tabindex="-1"></a><span class="bu">print</span>(df[<span class="st">"age"</span>].mean())   <span class="co"># 62.25</span></span></code><button title="Copy to Clipboard" class="code-copy-button"><i class="bi"></i></button></pre></div>
 <div class="cell-output cell-output-stdout">
 <pre><code>0    E11
 1    I10

@@ -7,7 +7,7 @@
 <meta name="viewport" content="width=device-width, initial-scale=1.0, user-scalable=yes">
 
 
-<title>Why Python? – Data Science in Python for Healthcare</title>
+<title>Resources – Data Science in Python for Healthcare</title>
 <style>
 code{white-space: pre-wrap;}
 span.smallcaps{font-variant: small-caps;}
@@ -30,8 +30,7 @@ ul.task-list li input[type="checkbox"] {
 <script src="../site_libs/quarto-search/fuse.min.js"></script>
 <script src="../site_libs/quarto-search/quarto-search.js"></script>
 <meta name="quarto:offset" content="../">
-<link href="../pages/001-setup.html" rel="next">
-<link href="../index.html" rel="prev">
+<link href="../pages/032-random-forest.html" rel="prev">
 <script src="../site_libs/quarto-html/quarto.js"></script>
 <script src="../site_libs/quarto-html/popper.min.js"></script>
 <script src="../site_libs/quarto-html/tippy.umd.min.js"></script>
@@ -81,7 +80,7 @@ ul.task-list li input[type="checkbox"] {
       <button type="button" class="quarto-btn-toggle btn" data-bs-toggle="collapse" role="button" data-bs-target=".quarto-sidebar-collapse-item" aria-controls="quarto-sidebar" aria-expanded="false" aria-label="Toggle sidebar navigation" onclick="if (window.quartoToggleHeadroom) { window.quartoToggleHeadroom(); }">
         <i class="bi bi-layout-text-sidebar-reverse"></i>
       </button>
-        <nav class="quarto-page-breadcrumbs" aria-label="breadcrumb"><ol class="breadcrumb"><li class="breadcrumb-item"><a href="../pages/000-why-python.html">Why Python?</a></li></ol></nav>
+        <nav class="quarto-page-breadcrumbs" aria-label="breadcrumb"><ol class="breadcrumb"><li class="breadcrumb-item"><a href="../pages/900-resources.html">Resources</a></li></ol></nav>
         <a class="flex-grow-1" role="navigation" data-bs-toggle="collapse" data-bs-target=".quarto-sidebar-collapse-item" aria-controls="quarto-sidebar" aria-expanded="false" aria-label="Toggle sidebar navigation" onclick="if (window.quartoToggleHeadroom) { window.quartoToggleHeadroom(); }">      
         </a>
       <button type="button" class="btn quarto-search-button" aria-label="Search" onclick="window.quartoOpenSearch();">
@@ -117,7 +116,7 @@ ul.task-list li input[type="checkbox"] {
 </li>
         <li class="sidebar-item">
   <div class="sidebar-item-container"> 
-  <a href="../pages/000-why-python.html" class="sidebar-item-text sidebar-link active">
+  <a href="../pages/000-why-python.html" class="sidebar-item-text sidebar-link">
  <span class="menu-text">Why Python?</span></a>
   </div>
 </li>
@@ -177,7 +176,7 @@ ul.task-list li input[type="checkbox"] {
 </li>
         <li class="sidebar-item">
   <div class="sidebar-item-container"> 
-  <a href="../pages/900-resources.html" class="sidebar-item-text sidebar-link">
+  <a href="../pages/900-resources.html" class="sidebar-item-text sidebar-link active">
  <span class="menu-text">Resources</span></a>
   </div>
 </li>
@@ -191,7 +190,9 @@ ul.task-list li input[type="checkbox"] {
     <h2 id="toc-title">On this page</h2>
    
   <ul>
-  <li><a href="#python-and-the-nhs-digital-transformation" id="toc-python-and-the-nhs-digital-transformation" class="nav-link active" data-scroll-target="#python-and-the-nhs-digital-transformation">Python and the NHS digital transformation</a></li>
+  <li><a href="#resources-for-further-learning" id="toc-resources-for-further-learning" class="nav-link active" data-scroll-target="#resources-for-further-learning">Resources for further learning</a></li>
+  <li><a href="#ai-in-the-nhs" id="toc-ai-in-the-nhs" class="nav-link" data-scroll-target="#ai-in-the-nhs">AI in the NHS</a></li>
+  <li><a href="#contact" id="toc-contact" class="nav-link" data-scroll-target="#contact">Contact</a></li>
   </ul>
 </nav>
     </div>
@@ -200,7 +201,7 @@ ul.task-list li input[type="checkbox"] {
 
 <header id="title-block-header" class="quarto-title-block default">
 <div class="quarto-title">
-<h1 class="title">Why Python?</h1>
+<h1 class="title">Resources</h1>
 </div>
 
 
@@ -217,25 +218,22 @@ ul.task-list li input[type="checkbox"] {
 </header>
 
 
-<p><span class="time-badge">⏱ 5 minutes</span></p>
-<p>Python is a general-purpose programming language first released in 1991. It was designed around a simple philosophy: code should be easy to read, easy to write, and easy to share. Python runs line by line in an interactive environment — which is why it works so naturally inside <em>notebooks</em>, where you can run a single <em>cell</em>, inspect the output, and decide what to do next. Python is free, open-source, and runs on any operating system.</p>
-<p>Over the past decade, Python has become the dominant language for data science and machine learning. Its ecosystem — <code>pandas</code> for data wrangling, <code>scikit-learn</code> for machine learning, <code>matplotlib</code> and <code>seaborn</code> for visualisation, <code>PyTorch</code> and <code>TensorFlow</code> for deep learning — is unmatched in breadth and quality.</p>
-<div id="e539bc20" class="cell" data-execution_count="1">
-<div class="cell-output cell-output-display">
-<div class="quarto-figure quarto-figure-center">
-<figure class="figure">
-<p><img src="000-why-python_files/figure-html/cell-2-output-1.png" alt="Bar chart showing Python as the most used programming language, followed by SQL and R." width="950" height="566" class="figure-img"></p>
-<figcaption>Python’s dominance in data science is reflected in the programming languages used by <a href="https://www.kaggle.com/c/kaggle-survey-2022">2022 Kaggle Machine Learning &amp; Data Science Survey</a> respondents.</figcaption>
-</figure>
-</div>
-</div>
-</div>
-<section id="python-and-the-nhs-digital-transformation" class="level3">
-<h3 class="anchored" data-anchor-id="python-and-the-nhs-digital-transformation">Python and the NHS digital transformation</h3>
-<p>The NHS is in the middle of a substantial digital transformation, and Python has become the de facto language of NHS England’s data science function. NHS England publishes its own data science work as open Python code on GitHub, and the <a href="https://nhsengland.github.io/datascience/">NHS England Data Science team</a> explicitly positions Python as its primary language for analytical and machine learning work.</p>
-<p>Also, NHS England has recognised that clinical staff — not just specialist data scientists — need these skills. The NHS Clinical Data Science Programme, funded by NHS England since 2023 with growing cohorts in 2024 and 2025, aims to empower healthcare professionals from across the health and social care workforce to apply data science in practice and translate data into patient benefit.</p>
-<p>The skills you will build in this course — <code>pandas</code> for data wrangling, <code>scikit-learn</code> for machine learning, <code>seaborn</code> for visualisation — are the skills listed in health data science job specifications, clinical informatics fellowships, and applied health research postdoctoral positions. They are also the foundation for deep learning and modern AI.</p>
-<p>That is why we start here.</p>
+<section id="resources-for-further-learning" class="level3">
+<h3 class="anchored" data-anchor-id="resources-for-further-learning">Resources for further learning</h3>
+<p><strong>Python basics</strong> <br> <a href="https://bristol-training.github.io/intro-python-1/" class="uri">https://bristol-training.github.io/intro-python-1/</a> <br> <a href="https://bristol-training.github.io/intro-python-2/" class="uri">https://bristol-training.github.io/intro-python-2/</a></p>
+<p><strong>Pandas and Seaborn</strong> <br> <a href="https://bristol-training.github.io/data-science-python-1/" class="uri">https://bristol-training.github.io/data-science-python-1/</a></p>
+<p><strong>Scikit-learn and machine learning</strong> <br> <a href="https://bristol-training.github.io/data-science-python-2/" class="uri">https://bristol-training.github.io/data-science-python-2/</a> <br> <a href="https://bristol-training.github.io/decision-tree-random-forest/" class="uri">https://bristol-training.github.io/decision-tree-random-forest/</a></p>
+</section>
+<section id="ai-in-the-nhs" class="level3">
+<h3 class="anchored" data-anchor-id="ai-in-the-nhs">AI in the NHS</h3>
+<p>Building a model that works on training data is the easy part. Deploying it safely — so that it improves outcomes rather than causing harm through automation bias, fairness failures, or poor calibration — requires multidisciplinary collaboration between clinicians, data scientists, information governance leads, and patients.</p>
+<p>The <a href="https://www.nhsx.nhs.uk/ai-lab/">NHS AI Ethics Initiative</a> and <a href="https://www.turing.ac.uk/sites/default/files/2024-06/aieg-ati-8-accountabilityv1.2.pdf">Alan Turing Institute’s guidance</a> are good starting points for understanding responsible deployment.</p>
+</section>
+<section id="contact" class="level3">
+<h3 class="anchored" data-anchor-id="contact">Contact</h3>
+<p>For queries related to this course please contact <a href="mailto:jgi-training@bristol.ac.uk">jgi-training@bristol.ac.uk</a>.</p>
+<p>If you are a PGR or resaerch staff at the University of Bristol (including Honorary contracts), you can get 8 hours of free data science support. Please contact <a href="mailto:ask-jgi@bristol.ac.uk">jgi-training@bristol.ac.uk</a>.</p>
+<p>For collaborations or long term support, please contact <a href="mailto:jgi-admin@bristol.ac.uk">jgi-admin@bristol.ac.uk</a>.</p>
 
 
 </section>
@@ -663,14 +661,11 @@ window.document.addEventListener("DOMContentLoaded", function (event) {
 </script>
 <nav class="page-navigation">
   <div class="nav-page nav-page-previous">
-      <a href="../index.html" class="pagination-link" aria-label="Introduction">
-        <i class="bi bi-arrow-left-short"></i> <span class="nav-page-text">Introduction</span>
+      <a href="../pages/032-random-forest.html" class="pagination-link" aria-label="Random Forest">
+        <i class="bi bi-arrow-left-short"></i> <span class="nav-page-text">Random Forest</span>
       </a>          
   </div>
   <div class="nav-page nav-page-next">
-      <a href="../pages/001-setup.html" class="pagination-link" aria-label="Workspace Setup">
-        <span class="nav-page-text">Workspace Setup</span> <i class="bi bi-arrow-right-short"></i>
-      </a>
   </div>
 </nav>
 </div> <!-- /content -->

@@ -7,7 +7,7 @@
 <meta name="viewport" content="width=device-width, initial-scale=1.0, user-scalable=yes">
 
 
-<title>Why Python? – Data Science in Python for Healthcare</title>
+<title>Machine Learning – Data Science in Python for Healthcare</title>
 <style>
 code{white-space: pre-wrap;}
 span.smallcaps{font-variant: small-caps;}
@@ -20,6 +20,40 @@ ul.task-list li input[type="checkbox"] {
   margin: 0 0.8em 0.2em -1em; /* quarto-specific, see https://github.com/quarto-dev/quarto-cli/issues/4556 */ 
   vertical-align: middle;
 }
+/* CSS for syntax highlighting */
+pre > code.sourceCode { white-space: pre; position: relative; }
+pre > code.sourceCode > span { line-height: 1.25; }
+pre > code.sourceCode > span:empty { height: 1.2em; }
+.sourceCode { overflow: visible; }
+code.sourceCode > span { color: inherit; text-decoration: inherit; }
+div.sourceCode { margin: 1em 0; }
+pre.sourceCode { margin: 0; }
+@media screen {
+div.sourceCode { overflow: auto; }
+}
+@media print {
+pre > code.sourceCode { white-space: pre-wrap; }
+pre > code.sourceCode > span { display: inline-block; text-indent: -5em; padding-left: 5em; }
+}
+pre.numberSource code
+  { counter-reset: source-line 0; }
+pre.numberSource code > span
+  { position: relative; left: -4em; counter-increment: source-line; }
+pre.numberSource code > span > a:first-child::before
+  { content: counter(source-line);
+    position: relative; left: -1em; text-align: right; vertical-align: baseline;
+    border: none; display: inline-block;
+    -webkit-touch-callout: none; -webkit-user-select: none;
+    -khtml-user-select: none; -moz-user-select: none;
+    -ms-user-select: none; user-select: none;
+    padding: 0 4px; width: 4em;
+  }
+pre.numberSource { margin-left: 3em;  padding-left: 4px; }
+div.sourceCode
+  {   }
+@media screen {
+pre > code.sourceCode > span > a:first-child::before { text-decoration: underline; }
+}
 </style>
 
 
@@ -30,8 +64,8 @@ ul.task-list li input[type="checkbox"] {
 <script src="../site_libs/quarto-search/fuse.min.js"></script>
 <script src="../site_libs/quarto-search/quarto-search.js"></script>
 <meta name="quarto:offset" content="../">
-<link href="../pages/001-setup.html" rel="next">
-<link href="../index.html" rel="prev">
+<link href="../pages/031-logistic-regression.html" rel="next">
+<link href="../pages/023-eda-visualisation.html" rel="prev">
 <script src="../site_libs/quarto-html/quarto.js"></script>
 <script src="../site_libs/quarto-html/popper.min.js"></script>
 <script src="../site_libs/quarto-html/tippy.umd.min.js"></script>
@@ -81,7 +115,7 @@ ul.task-list li input[type="checkbox"] {
       <button type="button" class="quarto-btn-toggle btn" data-bs-toggle="collapse" role="button" data-bs-target=".quarto-sidebar-collapse-item" aria-controls="quarto-sidebar" aria-expanded="false" aria-label="Toggle sidebar navigation" onclick="if (window.quartoToggleHeadroom) { window.quartoToggleHeadroom(); }">
         <i class="bi bi-layout-text-sidebar-reverse"></i>
       </button>
-        <nav class="quarto-page-breadcrumbs" aria-label="breadcrumb"><ol class="breadcrumb"><li class="breadcrumb-item"><a href="../pages/000-why-python.html">Why Python?</a></li></ol></nav>
+        <nav class="quarto-page-breadcrumbs" aria-label="breadcrumb"><ol class="breadcrumb"><li class="breadcrumb-item"><a href="../pages/030-machine-learning.html">Machine Learning</a></li></ol></nav>
         <a class="flex-grow-1" role="navigation" data-bs-toggle="collapse" data-bs-target=".quarto-sidebar-collapse-item" aria-controls="quarto-sidebar" aria-expanded="false" aria-label="Toggle sidebar navigation" onclick="if (window.quartoToggleHeadroom) { window.quartoToggleHeadroom(); }">      
         </a>
       <button type="button" class="btn quarto-search-button" aria-label="Search" onclick="window.quartoOpenSearch();">
@@ -117,7 +151,7 @@ ul.task-list li input[type="checkbox"] {
 </li>
         <li class="sidebar-item">
   <div class="sidebar-item-container"> 
-  <a href="../pages/000-why-python.html" class="sidebar-item-text sidebar-link active">
+  <a href="../pages/000-why-python.html" class="sidebar-item-text sidebar-link">
  <span class="menu-text">Why Python?</span></a>
   </div>
 </li>
@@ -159,7 +193,7 @@ ul.task-list li input[type="checkbox"] {
 </li>
         <li class="sidebar-item">
   <div class="sidebar-item-container"> 
-  <a href="../pages/030-machine-learning.html" class="sidebar-item-text sidebar-link">
+  <a href="../pages/030-machine-learning.html" class="sidebar-item-text sidebar-link active">
  <span class="menu-text">Machine Learning</span></a>
   </div>
 </li>
@@ -191,7 +225,8 @@ ul.task-list li input[type="checkbox"] {
     <h2 id="toc-title">On this page</h2>
    
   <ul>
-  <li><a href="#python-and-the-nhs-digital-transformation" id="toc-python-and-the-nhs-digital-transformation" class="nav-link active" data-scroll-target="#python-and-the-nhs-digital-transformation">Python and the NHS digital transformation</a></li>
+  <li><a href="#unsupervised-learning" id="toc-unsupervised-learning" class="nav-link active" data-scroll-target="#unsupervised-learning">Unsupervised Learning</a></li>
+  <li><a href="#the-machine-learning-pipeline" id="toc-the-machine-learning-pipeline" class="nav-link" data-scroll-target="#the-machine-learning-pipeline">The Machine Learning Pipeline</a></li>
   </ul>
 </nav>
     </div>
@@ -200,7 +235,7 @@ ul.task-list li input[type="checkbox"] {
 
 <header id="title-block-header" class="quarto-title-block default">
 <div class="quarto-title">
-<h1 class="title">Why Python?</h1>
+<h1 class="title">Machine Learning</h1>
 </div>
 
 
@@ -217,27 +252,147 @@ ul.task-list li input[type="checkbox"] {
 </header>
 
 
-<p><span class="time-badge">⏱ 5 minutes</span></p>
-<p>Python is a general-purpose programming language first released in 1991. It was designed around a simple philosophy: code should be easy to read, easy to write, and easy to share. Python runs line by line in an interactive environment — which is why it works so naturally inside <em>notebooks</em>, where you can run a single <em>cell</em>, inspect the output, and decide what to do next. Python is free, open-source, and runs on any operating system.</p>
-<p>Over the past decade, Python has become the dominant language for data science and machine learning. Its ecosystem — <code>pandas</code> for data wrangling, <code>scikit-learn</code> for machine learning, <code>matplotlib</code> and <code>seaborn</code> for visualisation, <code>PyTorch</code> and <code>TensorFlow</code> for deep learning — is unmatched in breadth and quality.</p>
-<div id="e539bc20" class="cell" data-execution_count="1">
-<div class="cell-output cell-output-display">
-<div class="quarto-figure quarto-figure-center">
-<figure class="figure">
-<p><img src="000-why-python_files/figure-html/cell-2-output-1.png" alt="Bar chart showing Python as the most used programming language, followed by SQL and R." width="950" height="566" class="figure-img"></p>
-<figcaption>Python’s dominance in data science is reflected in the programming languages used by <a href="https://www.kaggle.com/c/kaggle-survey-2022">2022 Kaggle Machine Learning &amp; Data Science Survey</a> respondents.</figcaption>
-</figure>
+<p><span class="time-badge">⏱ 10 minutes</span></p>
+<p>Machine learning (ML) is a set of techniques for building <strong>algorithms that learn from data</strong> — rather than algorithms that follow explicit rules written by a programmer.</p>
+<p>In clinical practice, you may be already using the output of ML models without knowing it:</p>
+<ul>
+<li><strong>QRISK3</strong> uses a statistical model (Cox regression) fitted on primary care data</li>
+<li><strong>Sepsis-3</strong> criteria were validated against survival data in ICU cohorts</li>
+</ul>
+<p>There are two main classes of machine learning: supervised and unsupervised. Here we will focus on supervised learning, which is most relevant for clinical prediction tasks.</p>
+<p><strong>Supervised Learning</strong></p>
+<p>Supervised learning algorithms are trained on <strong>labeled data</strong>, where both input features and corresponding output labels are provided. The goal is to learn a function that maps inputs to outputs.</p>
+<p>This type of learning is further divided into:</p>
+<section id="classification" class="level4">
+<h4 class="anchored" data-anchor-id="classification">Classification</h4>
+<p>Predicting <strong>discrete categories or classes</strong>. Examples:</p>
+<ul>
+<li>Diagnosing diseases from medical images (e.g., classifying MRI scans as showing a brain tumour vs.&nbsp;normal tissue)</li>
+<li>Predicting whether a patient has diabetes based on clinical measurements</li>
+<li>Identifying cardiac arrhythmias from ECG signals</li>
+</ul>
+</section>
+<section id="regression" class="level4">
+<h4 class="anchored" data-anchor-id="regression">Regression</h4>
+<p>Predicting <strong>continuous values</strong>. Examples:</p>
+<ul>
+<li>Estimating a patient’s risk score for developing a condition (e.g., 10‑year cardiovascular risk)</li>
+<li>Predicting length of hospital stay</li>
+<li>Forecasting a patient’s blood glucose levels</li>
+</ul>
+</section>
+<section id="unsupervised-learning" class="level3">
+<h3 class="anchored" data-anchor-id="unsupervised-learning">Unsupervised Learning</h3>
+<p>In unsupervised learning, there are <strong>no labels</strong> associated with the data. The algorithm must uncover patterns, structure, or latent features on its own.</p>
+<section id="clustering" class="level4">
+<h4 class="anchored" data-anchor-id="clustering">Clustering</h4>
+<p>Grouping similar data points together. Examples:</p>
+<ul>
+<li>Grouping patients into subtypes of a disease based on genetic or clinical profiles</li>
+<li>Detecting anomalous patterns in vital‑sign data that may indicate medical emergencies</li>
+<li>Clustering radiology images to identify patterns without prior annotations</li>
+</ul>
+</section>
+<section id="dimensionality-reduction" class="level4">
+<h4 class="anchored" data-anchor-id="dimensionality-reduction">Dimensionality Reduction</h4>
+<p>Reducing the number of features while retaining as much useful information as possible. Examples:</p>
+<ul>
+<li>Reducing thousands of gene expression features to a smaller set of informative biomarkers</li>
+<li>Visualising high‑dimensional MRI data</li>
+<li>Preprocessing data for models to avoid overfitting</li>
+</ul>
+</section>
+</section>
+<section id="the-machine-learning-pipeline" class="level3">
+<h3 class="anchored" data-anchor-id="the-machine-learning-pipeline">The Machine Learning Pipeline</h3>
+<p>In this course we will use <a href="https://scikit-learn.org/"><code>scikit‑learn</code></a>, a comprehensive Python library that provides all the essential components of the machine‑learning pipeline. It offers an integrated framework for data preprocessing, model training, evaluation, and deployment, allowing us to build end‑to‑end ML workflows in a consistent and efficient way.</p>
+<pre><code>Raw data → Feature engineering → Train/Test split → Fit model → Evaluate → (optionally) Deploy</code></pre>
+<section id="features-and-labels" class="level4">
+<h4 class="anchored" data-anchor-id="features-and-labels">Features and labels</h4>
+<ul>
+<li><strong>Features</strong> (X): the input variables — age, HbA1c, Charlson index, etc.</li>
+<li><strong>Label</strong> (y): the thing we want to predict — <code>readmitted_30d</code></li>
+</ul>
+</section>
+<section id="train-test-split" class="level4">
+<h4 class="anchored" data-anchor-id="train-test-split">Train / Test split</h4>
+<p>This is the most important concept in applied ML. We <strong>never</strong> evaluate a model on the same data it was trained on — this would be like revising using the exam paper itself.</p>
+<pre><code>All data (N=5000)
+│
+├── Training set (80%, N=4000)  ← model learns from this
+│
+└── Test set (20%, N=1000)      ← evaluate here only, at the very end</code></pre>
+<p>We use <code>scikit-learn</code>’s <code>train_test_split()</code> function:</p>
+<div class="sourceCode" id="cb3"><pre class="sourceCode python code-with-copy"><code class="sourceCode python"><span id="cb3-1"><a href="#cb3-1" aria-hidden="true" tabindex="-1"></a><span class="im">from</span> sklearn.model_selection <span class="im">import</span> train_test_split</span>
+<span id="cb3-2"><a href="#cb3-2" aria-hidden="true" tabindex="-1"></a></span>
+<span id="cb3-3"><a href="#cb3-3" aria-hidden="true" tabindex="-1"></a>X_train, X_test, y_train, y_test <span class="op">=</span> train_test_split(</span>
+<span id="cb3-4"><a href="#cb3-4" aria-hidden="true" tabindex="-1"></a>    X, y,</span>
+<span id="cb3-5"><a href="#cb3-5" aria-hidden="true" tabindex="-1"></a>    test_size<span class="op">=</span><span class="fl">0.2</span>,       <span class="co"># 20% held out for testing</span></span>
+<span id="cb3-6"><a href="#cb3-6" aria-hidden="true" tabindex="-1"></a>    random_state<span class="op">=</span><span class="dv">42</span>,     <span class="co"># reproducible random split</span></span>
+<span id="cb3-7"><a href="#cb3-7" aria-hidden="true" tabindex="-1"></a>    stratify<span class="op">=</span>y           <span class="co"># preserve 77/23 class ratio in both splits</span></span>
+<span id="cb3-8"><a href="#cb3-8" aria-hidden="true" tabindex="-1"></a>)</span></code><button title="Copy to Clipboard" class="code-copy-button"><i class="bi"></i></button></pre></div>
+</section>
+<section id="evaluating-classification-models" class="level4">
+<h4 class="anchored" data-anchor-id="evaluating-classification-models">Evaluating Classification Models</h4>
+<p>Metrics like accuracy alone is misleading when classes are imbalanced (e.g.&nbsp;77% No, 23% Yes). A model that always predicts “No” achieves 77% accuracy but is clinically useless.</p>
+<p>The key metrics are:</p>
+<table class="caption-top table">
+<colgroup>
+<col style="width: 23%">
+<col style="width: 26%">
+<col style="width: 50%">
+</colgroup>
+<thead>
+<tr class="header">
+<th>Metric</th>
+<th>Formula</th>
+<th>Clinical meaning</th>
+</tr>
+</thead>
+<tbody>
+<tr class="odd">
+<td><strong>Sensitivity</strong> (Recall)</td>
+<td>TP / (TP + FN)</td>
+<td>What fraction of readmissions did we catch?</td>
+</tr>
+<tr class="even">
+<td><strong>Specificity</strong></td>
+<td>TN / (TN + FP)</td>
+<td>What fraction of non-readmissions did we correctly identify?</td>
+</tr>
+<tr class="odd">
+<td><strong>Precision</strong> (PPV)</td>
+<td>TP / (TP + FP)</td>
+<td>Of our flagged patients, how many were actually readmitted?</td>
+</tr>
+<tr class="even">
+<td><strong>F1 Score</strong></td>
+<td>2 × (Prec × Rec) / (Prec + Rec)</td>
+<td>Harmonic mean of precision and recall</td>
+</tr>
+<tr class="odd">
+<td><strong>AUC-ROC</strong></td>
+<td>Area under ROC curve</td>
+<td>Overall discriminative ability (0.5 = random, 1.0 = perfect)</td>
+</tr>
+</tbody>
+</table>
+<div class="callout callout-style-default callout-note callout-titled">
+<div class="callout-header d-flex align-content-center">
+<div class="callout-icon-container">
+<i class="callout-icon"></i>
+</div>
+<div class="callout-title-container flex-fill">
+AUC-ROC in clinical context
 </div>
 </div>
+<div class="callout-body-container callout-body">
+<p>An AUC of 0.70–0.80 is considered “acceptable” for clinical prediction models. QRISK3 achieves ~0.88 for cardiovascular events. Most published NHS readmission models achieve 0.65–0.75 AUC — moderate discrimination but clinically useful at scale.</p>
 </div>
-<section id="python-and-the-nhs-digital-transformation" class="level3">
-<h3 class="anchored" data-anchor-id="python-and-the-nhs-digital-transformation">Python and the NHS digital transformation</h3>
-<p>The NHS is in the middle of a substantial digital transformation, and Python has become the de facto language of NHS England’s data science function. NHS England publishes its own data science work as open Python code on GitHub, and the <a href="https://nhsengland.github.io/datascience/">NHS England Data Science team</a> explicitly positions Python as its primary language for analytical and machine learning work.</p>
-<p>Also, NHS England has recognised that clinical staff — not just specialist data scientists — need these skills. The NHS Clinical Data Science Programme, funded by NHS England since 2023 with growing cohorts in 2024 and 2025, aims to empower healthcare professionals from across the health and social care workforce to apply data science in practice and translate data into patient benefit.</p>
-<p>The skills you will build in this course — <code>pandas</code> for data wrangling, <code>scikit-learn</code> for machine learning, <code>seaborn</code> for visualisation — are the skills listed in health data science job specifications, clinical informatics fellowships, and applied health research postdoctoral positions. They are also the foundation for deep learning and modern AI.</p>
-<p>That is why we start here.</p>
+</div>
 
 
+</section>
 </section>
 
 </main> <!-- /main -->
@@ -663,13 +818,13 @@ window.document.addEventListener("DOMContentLoaded", function (event) {
 </script>
 <nav class="page-navigation">
   <div class="nav-page nav-page-previous">
-      <a href="../index.html" class="pagination-link" aria-label="Introduction">
-        <i class="bi bi-arrow-left-short"></i> <span class="nav-page-text">Introduction</span>
+      <a href="../pages/023-eda-visualisation.html" class="pagination-link" aria-label="Exploratory Data Analysis &amp; Visualisation">
+        <i class="bi bi-arrow-left-short"></i> <span class="nav-page-text">Exploratory Data Analysis &amp; Visualisation</span>
       </a>          
   </div>
   <div class="nav-page nav-page-next">
-      <a href="../pages/001-setup.html" class="pagination-link" aria-label="Workspace Setup">
-        <span class="nav-page-text">Workspace Setup</span> <i class="bi bi-arrow-right-short"></i>
+      <a href="../pages/031-logistic-regression.html" class="pagination-link" aria-label="Logistic Regression">
+        <span class="nav-page-text">Logistic Regression</span> <i class="bi bi-arrow-right-short"></i>
       </a>
   </div>
 </nav>
