@@ -39,3 +39,5 @@ If you are a PGR or resaerch staff at the University of Bristol (including Honor
 
 For collaborations or long term support, please contact [jgi-admin@bristol.ac.uk](mailto:jgi-admin@bristol.ac.uk).
 
+<br>
+[Link to feedback QR](../assets/feedback.png)
