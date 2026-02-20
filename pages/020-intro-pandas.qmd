@@ -1,0 +1,167 @@
+---
+title: "Introduction to Pandas"
+---
+
+<span class="time-badge">⏱ 15 minutes</span>
+
+
+
+`Pandas` is a core Python library for working with structured (tabular) data. It provides high-level data structures like **DataFrame** and **Series**, designed to make data cleaning, transformation, and analysis efficient and expressive.
+
+With `pandas`, you can filter rows, compute aggregates, reshape datasets, merge multiple sources, and handle missing values using concise, readable code. Because every step of your workflow is written as code, analyses can be rerun, reviewed, version-controlled, and shared without ambiguity. It also scales well to large datasets and integrates seamlessly with visualization libraries and machine learning frameworks.
+
+### The DataFrame
+
+The core pandas object (data structure) is the **DataFrame** — a two-dimensional table with labelled rows and columns.
+
+```{python}
+import pandas as pd
+
+# A minimal patient DataFrame built from a dictionary
+data = {
+    "patient_id":  ["P001", "P002", "P003", "P004"],
+    "age":         [67, 45, 82, 55],
+    "sex":         ["M", "F", "F", "M"],
+    "diagnosis":   ["E11", "I10", "J44", "E11"],  # ICD-10 codes
+    "hba1c":       [71, None, 58, 84],            # mmol/mol; None = missing
+    "readmitted":  [True, False, True, False],
+}
+
+df = pd.DataFrame(data)
+print(df)
+```
+
+```
+  patient_id  age sex diagnosis  hba1c  readmitted
+0       P001   67   M       E11   71.0        True
+1       P002   45   F       I10    NaN       False
+2       P003   82   F       J44   58.0        True
+3       P004   55   M       E11   84.0       False
+```
+
+
+### Accessing Columns
+
+Select a single column using square brackets — this returns a **Series**:
+
+```{python}
+ages = df["age"]
+print(ages)
+print(type(ages))
+```
+
+
+Select multiple columns by passing a list of names — this returns a **DataFrame**:
+
+```{python}
+demographics = df[["patient_id", "age", "sex"]]
+print(demographics)
+```
+
+
+### Creating Columns
+
+Assign to a new column name to add it to the DataFrame. The value can be a constant, a calculation on existing columns, or a condition:
+
+```{python}
+df["age_over_65"] = df["age"] > 65
+df["hba1c_above_target"] = df["hba1c"] - 48  # target threshold: 48 mmol/mol
+print(df[["patient_id", "age", "age_over_65", "hba1c", "hba1c_above_target"]])
+```
+
+
+
+### Quick Inspection Methods
+
+When you first receive a dataset, you can use these four commands to quickly understand its structure and contents:
+
+```{python}
+print(df.shape)           # (rows, columns)
+```
+
+```{python}
+print(df.dtypes)          # data type of each column
+```
+
+```{python}
+print(df.head())          # first 5 rows
+```
+
+```{python}
+print(df.describe())    # summary statistics for numeric columns
+```
+
+`describe()` gives count, mean, standard deviation, min, quartiles, and max for every numeric column.
+
+
+### Series Operations
+
+A Series supports vectorised operations — you apply a function to every element at once. They use optimised C code under the hood, making them much faster than Python `for` loops. For large datasets with hundreds of thousands of rows, this matters.
+
+```{python}
+# Classify each patient's age in a single line
+age_over_65 = df["age"] > 65
+print(age_over_65)
+```
+
+```
+0     True
+1    False
+2     True
+3    False
+Name: age, dtype: bool
+```
+
+Common Series methods:
+
+```{python}
+df["age"].mean()      # average age
+```
+
+```{python}
+df["age"].median()    # median age
+```
+
+```{python}
+df["age"].std()       # standard deviation
+```
+
+```{python}
+df["age"].min()       # minimum
+```
+
+```{python}
+df["age"].max()       # maximum
+```
+
+```{python}
+df["hba1c"].count()   # non-missing count
+```
+
+```{python}
+df["sex"].value_counts()  # frequency of each category
+```
+
+
+::: {.callout-tip}
+### Exercise 3
+Using the small DataFrame `df` we built above:
+
+1. Print the `diagnosis` column.
+2. Print only the `age` and `readmitted` columns together.
+3. What is the mean age? (*Hint*: `df["age"].mean()`)
+:::
+
+::: {.callout-caution collapse="true"}
+### Answer 
+```{python}
+# 1.
+print(df["diagnosis"])
+
+# 2.
+print(df[["age", "readmitted"]])
+
+# 3.
+print(df["age"].mean())   # 62.25
+```
+:::
