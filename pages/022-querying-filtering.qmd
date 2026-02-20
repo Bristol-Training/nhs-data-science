@@ -9,7 +9,7 @@ title: "Filtering & Missing Data"
 
 import pandas as pd
 
-url = "https://raw.githubusercontent.com/pauerola/nhs-data-science/refs/heads/main/data/nhs_readmission.csv"
+url = "https://raw.githubusercontent.com/Bristol-Training/nhs-data-science/refs/heads/main/data/nhs_readmission.csv"
 
 df = pd.read_csv(
     url,
@@ -18,18 +18,6 @@ df = pd.read_csv(
     na_values=[".", "N/A", "NULL", "UNKNOWN"],  # Add this
 )
 
-
-df["egfr_missing"] = df["egfr"].isnull().astype(int)
-df["egfr"] = df["egfr"].fillna(df["egfr"].median())
-
-bmi_median = df["bmi"].median()
-df["bmi"] = df["bmi"].fillna(bmi_median)
-
-ward_mode = df["discharge_ward"].mode()[0]
-df["discharge_ward"] = df["discharge_ward"].fillna(ward_mode)
-
-df["hba1c_missing"] = df["hba1c"].isnull().astype(int)
-df["hba1c"] = df["hba1c"].fillna(df["hba1c"].median())
 
 ```
 
@@ -85,10 +73,7 @@ has_hba1c = df[df["hba1c"].notnull()]
 print(f"Patients with HbA1c result: {len(has_hba1c)}")
 ```
 
-```
-Patients with no HbA1c result: 812
-Patients with HbA1c result: 4188
-```
+
 
 ::: {.callout-tip}
 ### Exercise 5
@@ -119,7 +104,7 @@ print(f"CKD 30-day readmission rate: {readmit_rate:.1%}")
 
 Missing data is endemic in medical records. Understanding *why* data is missing matters as much as knowing *how* to handle it technically.
 
-### The three types of missingness
+***The three types of missingness***
 
 | Type | What it means | Example |
 |------|---------------|---------|
@@ -138,10 +123,7 @@ print(f"Rows after dropping missing hba1c/egfr: {len(df_dropped)}")
 print(f"Rows removed: {len(df) - len(df_dropped)}")
 ```
 
-```
-Rows after dropping missing hba1c/egfr: 3821
-Rows removed: 1179
-```
+
 
 ::: {.callout-warning}
 ### Use `dropna()` with caution
@@ -223,14 +205,6 @@ dtype: int64
 
 `egfr` still has 445 missing — we'll apply the same indicator strategy before modelling.
 
-```{python}
-# For egfr: flag missingness before imputing
-df["egfr_missing"] = df["egfr"].isnull().astype(int)
-
-# Then impute with median
-df["egfr"] = df["egfr"].fillna(df["egfr"].median())
-```
-
 
 ::: {.callout-tip}
 ### Exercise 6
@@ -253,5 +227,40 @@ df["egfr"] = df["egfr"].fillna(df["egfr"].median())
 # 3. Verify
 print(df["egfr"].isnull().sum())   # should be 0
 print(df["egfr_missing"].value_counts())
+```
+:::
+
+
+::: {.callout-note collapse="true"}
+### Full data loading and cleaning steps
+```{python}
+
+import pandas as pd
+import numpy as np
+
+url = "https://raw.githubusercontent.com/Bristol-Training/nhs-data-science/refs/heads/main/data/nhs_readmission.csv"
+
+df = pd.read_csv(
+    url,
+    skiprows=3,
+    index_col="patient_id",
+    na_values=[".", "N/A", "NULL", "UNKNOWN"],  # Add this
+)
+
+
+df["egfr_missing"] = df["egfr"].isnull().astype(int)
+df["egfr"] = df["egfr"].fillna(df["egfr"].median())
+
+bmi_median = df["bmi"].median()
+df["bmi"] = df["bmi"].fillna(bmi_median)
+
+ward_mode = df["discharge_ward"].mode()[0]
+df["discharge_ward"] = df["discharge_ward"].fillna(ward_mode)
+
+df["hba1c_missing"] = df["hba1c"].isnull().astype(int)
+df["hba1c"] = df["hba1c"].fillna(df["hba1c"].median())
+
+df.dropna(inplace=True)
+
 ```
 :::

@@ -59,12 +59,12 @@ patient_id,age,sex,imd_decile,primary_diagnosis,charlson_index,hba1c,egfr,bmi,lo
 ```
 
 
-### Step 1 — A first attempt
+### Step 1 — `read_csv`
 
 ```{python}
 import pandas as pd
 
-url = "https://raw.githubusercontent.com/pauerola/nhs-data-science/refs/heads/main/data/nhs_readmission.csv"
+url = "https://raw.githubusercontent.com/Bristol-Training/nhs-data-science/refs/heads/main/data/nhs_readmission.csv"
 
 df = pd.read_csv(url)
 df.head()

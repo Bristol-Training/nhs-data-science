@@ -31,14 +31,6 @@ df = pd.DataFrame(data)
 print(df)
 ```
 
-```
-  patient_id  age sex diagnosis  hba1c  readmitted
-0       P001   67   M       E11   71.0        True
-1       P002   45   F       I10    NaN       False
-2       P003   82   F       J44   58.0        True
-3       P004   55   M       E11   84.0       False
-```
-
 
 ### Accessing Columns
 
@@ -104,13 +96,6 @@ age_over_65 = df["age"] > 65
 print(age_over_65)
 ```
 
-```
-0     True
-1    False
-2     True
-3    False
-Name: age, dtype: bool
-```
 
 Common Series methods:
 

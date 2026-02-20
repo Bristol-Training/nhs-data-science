@@ -1,0 +1,119 @@
+---
+title: "Machine Learning"
+---
+
+<span class="time-badge">⏱ 10 minutes</span>
+
+
+Machine learning (ML) is a set of techniques for building **algorithms that learn from data** — rather than algorithms that follow explicit rules written by a programmer.
+
+In clinical practice, you may be already using the output of ML models without knowing it:
+
+- **QRISK3** uses a statistical model (Cox regression) fitted on primary care data
+- **Sepsis-3** criteria were validated against survival data in ICU cohorts
+
+There are two main classes of machine learning: supervised and unsupervised. Here we will focus on supervised learning, which is most relevant for clinical prediction tasks.
+
+**Supervised Learning**
+
+Supervised learning algorithms are trained on **labeled data**, where both input features and corresponding output labels are provided. The goal is to learn a function that maps inputs to outputs.
+
+This type of learning is further divided into:
+
+#### Classification
+
+Predicting **discrete categories or classes**. Examples:
+
+- Diagnosing diseases from medical images (e.g., classifying MRI scans as showing a brain tumour vs. normal tissue)
+- Predicting whether a patient has diabetes based on clinical measurements
+- Identifying cardiac arrhythmias from ECG signals
+
+#### Regression
+
+Predicting **continuous values**. Examples:
+
+- Estimating a patient’s risk score for developing a condition (e.g., 10‑year cardiovascular risk)
+- Predicting length of hospital stay
+- Forecasting a patient’s blood glucose levels
+
+
+### Unsupervised Learning
+
+In unsupervised learning, there are **no labels** associated with the data. The algorithm must uncover patterns, structure, or latent features on its own.
+
+#### Clustering
+
+Grouping similar data points together. Examples:
+
+- Grouping patients into subtypes of a disease based on genetic or clinical profiles
+- Detecting anomalous patterns in vital‑sign data that may indicate medical emergencies
+- Clustering radiology images to identify patterns without prior annotations
+
+#### Dimensionality Reduction
+
+Reducing the number of features while retaining as much useful information as possible. Examples:
+
+- Reducing thousands of gene expression features to a smaller set of informative biomarkers
+- Visualising high‑dimensional MRI data
+- Preprocessing data for models to avoid overfitting
+
+
+
+### The Machine Learning Pipeline
+
+In this course we will use [`scikit‑learn`](https://scikit-learn.org/), a comprehensive Python library that provides all the essential components of the machine‑learning pipeline. It offers an integrated framework for data preprocessing, model training, evaluation, and deployment, allowing us to build end‑to‑end ML workflows in a consistent and efficient way.
+
+```
+Raw data → Feature engineering → Train/Test split → Fit model → Evaluate → (optionally) Deploy
+```
+
+#### Features and labels
+
+- **Features** (X): the input variables — age, HbA1c, Charlson index, etc.
+- **Label** (y): the thing we want to predict — `readmitted_30d`
+
+#### Train / Test split
+
+This is the most important concept in applied ML. We **never** evaluate a model on the same data it was trained on — this would be like revising using the exam paper itself.
+
+```
+All data (N=5000)
+│
+├── Training set (80%, N=4000)  ← model learns from this
+│
+└── Test set (20%, N=1000)      ← evaluate here only, at the very end
+```
+
+We use `scikit-learn`'s `train_test_split()` function:
+
+```python
+from sklearn.model_selection import train_test_split
+
+X_train, X_test, y_train, y_test = train_test_split(
+    X, y,
+    test_size=0.2,       # 20% held out for testing
+    random_state=42,     # reproducible random split
+    stratify=y           # preserve 77/23 class ratio in both splits
+)
+```
+
+
+#### Evaluating Classification Models
+
+Metrics like accuracy alone is misleading when classes are imbalanced (e.g. 77% No, 23% Yes). A model that always predicts "No" achieves 77% accuracy but is clinically useless.
+
+The key metrics are:
+
+| Metric | Formula | Clinical meaning |
+|--------|---------|-----------------|
+| **Sensitivity** (Recall) | TP / (TP + FN) | What fraction of readmissions did we catch? |
+| **Specificity** | TN / (TN + FP) | What fraction of non-readmissions did we correctly identify? |
+| **Precision** (PPV) | TP / (TP + FP) | Of our flagged patients, how many were actually readmitted? |
+| **F1 Score** | 2 × (Prec × Rec) / (Prec + Rec) | Harmonic mean of precision and recall |
+| **AUC-ROC** | Area under ROC curve | Overall discriminative ability (0.5 = random, 1.0 = perfect) |
+
+::: {.callout-note}
+### AUC-ROC in clinical context
+An AUC of 0.70–0.80 is considered "acceptable" for clinical prediction models. QRISK3 achieves ~0.88 for cardiovascular events. Most published NHS readmission models achieve 0.65–0.75 AUC — moderate discrimination but clinically useful at scale.
+:::
+

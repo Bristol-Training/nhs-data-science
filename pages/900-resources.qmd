@@ -1,0 +1,41 @@
+---
+title: "Resources"
+---
+
+
+### Resources for further learning
+
+
+**Python basics**
+<br>
+<https://bristol-training.github.io/intro-python-1/>
+<br>
+<https://bristol-training.github.io/intro-python-2/>
+
+**Pandas and Seaborn**
+<br>
+<https://bristol-training.github.io/data-science-python-1/>
+
+**Scikit-learn and machine learning**
+<br>
+<https://bristol-training.github.io/data-science-python-2/>
+<br>
+<https://bristol-training.github.io/decision-tree-random-forest/>
+
+
+### AI in the NHS
+
+Building a model that works on training data is the easy part. Deploying it safely — so that it improves outcomes rather than causing harm through automation bias, fairness failures, or poor calibration — requires multidisciplinary collaboration between clinicians, data scientists, information governance leads, and patients.
+
+The [NHS AI Ethics Initiative](https://www.nhsx.nhs.uk/ai-lab/) and [Alan Turing Institute's guidance](https://www.turing.ac.uk/sites/default/files/2024-06/aieg-ati-8-accountabilityv1.2.pdf) are good starting points for understanding responsible deployment.
+
+### Contact
+
+For queries related to this course please contact [jgi-training@bristol.ac.uk](mailto:jgi-training@bristol.ac.uk).
+
+
+If you are a PGR or resaerch staff at the University of Bristol (including Honorary contracts), you can get 8 hours of free data science support. Please contact [jgi-training@bristol.ac.uk](mailto:ask-jgi@bristol.ac.uk).
+
+
+For collaborations or long term support, please contact [jgi-admin@bristol.ac.uk](mailto:jgi-admin@bristol.ac.uk).
+

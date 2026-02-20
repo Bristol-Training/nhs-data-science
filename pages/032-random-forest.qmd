@@ -4,14 +4,39 @@ title: "Random Forest"
 
 <span class="time-badge">⏱ 30 minutes</span>
 
----
+### From Decision Trees to Random Forest
+
+A **decision tree** splits data into branches based on feature values, creating a flowchart-like structure. They are intuitive — think of them as a structured clinical decision pathway — but they overfit easily: a sufficiently deep tree will memorise the training data perfectly and fail on new patients.
+
+![A decision tree is a machine‑learning model that makes predictions by recursively splitting data into branches based on feature values, forming a tree‑like structure of decisions and outcomes.](../assets/decision_tree.png){fig-alt="A decision tree example"}
+
+
+A **Random Forest** solves this by training **many trees in parallel**, each on a random subset of data and a random subset of features. The final prediction is the majority vote across all trees. This process is called **bootstrap aggregation** (bagging).
+
+### Why Random Forest over Logistic Regression?
+
+| Property | Logistic Regression | Random Forest |
+|----------|--------------------|--------------  |
+| Interpretability | High (odds ratios) | Moderate (feature importance) |
+| Non-linear relationships | ❌ Assumes linearity | ✅ Handles automatically |
+| Feature scaling required | ✅ Yes | ❌ No |
+| Interaction terms | ❌ Must add manually | ✅ Captured automatically |
+| Missing data tolerance | Low | Moderate |
+| Training speed | Very fast | Moderate |
+| Typical clinical AUC | 0.65–0.75 | 0.70–0.80 |
+
+### Fitting a Random Forest
+
+Random Forest does not require feature scaling. We use the same feature matrix `X` as before, but no `StandardScaler`:
+
+::: {.callout-note collapse="true"}
+### Don't forget to load your data...
 ```{python}
-#| echo: false
 
 import pandas as pd
 import numpy as np
 
-url = "https://raw.githubusercontent.com/pauerola/nhs-data-science/refs/heads/main/data/nhs_readmission.csv"
+url = "https://raw.githubusercontent.com/Bristol-Training/nhs-data-science/refs/heads/main/data/nhs_readmission.csv"
 
 df = pd.read_csv(
     url,
@@ -70,32 +95,9 @@ X = pd.get_dummies(
 # Encode outcome as binary integer
 y = (df["readmitted_30d"] == "Yes").astype(int)
 
-print(f"Feature matrix shape: {X.shape}")
-print(f"Positive class (readmitted): {y.sum()} / {len(y)} ({y.mean():.1%})")
 ```
+:::
 
-
-### From Decision Trees to Random Forest
-
-A **decision tree** splits data into branches based on feature values, creating a flowchart-like structure. They are intuitive — think of them as a structured clinical decision pathway — but they overfit easily: a sufficiently deep tree will memorise the training data perfectly and fail on new patients.
-
-A **Random Forest** solves this by training **many trees in parallel**, each on a random subset of data and a random subset of features. The final prediction is the majority vote across all trees. This process is called **bootstrap aggregation** (bagging).
-
-### Why Random Forest over Logistic Regression?
-
-| Property | Logistic Regression | Random Forest |
-|----------|--------------------|--------------  |
-| Interpretability | High (odds ratios) | Moderate (feature importance) |
-| Non-linear relationships | ❌ Assumes linearity | ✅ Handles automatically |
-| Feature scaling required | ✅ Yes | ❌ No |
-| Interaction terms | ❌ Must add manually | ✅ Captured automatically |
-| Missing data tolerance | Low | Moderate |
-| Training speed | Very fast | Moderate |
-| Typical clinical AUC | 0.65–0.75 | 0.70–0.80 |
-
-### Fitting a Random Forest
-
-Random Forest does not require feature scaling. We use the same feature matrix `X` as before, but no `StandardScaler`:
 
 ```{python}
 from sklearn.ensemble import RandomForestClassifier
@@ -139,32 +141,15 @@ print(f"Random Forest AUC-ROC: {auc_rf:.3f}")
 ```
 
 
-
-The Random Forest achieves AUC 0.793 vs 0.741 for Logistic Regression — a meaningful improvement, particularly in recall (catching readmissions).
+The Random Forest achieves AUC 0.708 vs 0.705 for Logistic Regression — a marginal improvement.
 
 ### Feature Importance
 
 One of the key advantages of Random Forest over black-box models is its built-in **feature importance** scores.
 
-### Method 1: Mean Decrease in Impurity (MDI)
+**Permutation importance** is the preferred method for reporting in clinical papers. Other methods like Mean Decrease in Impurity (MDI) are useful for quick exploration but should not be quoted in publications due to its bias towards numeric features with many unique values. The error bars from multiple repeats tell you how stable the importance estimate is.
 
-MDI measures how much each feature reduces impurity (Gini index) across all splits in all trees. It is fast but biased towards high-cardinality (many unique values) numeric features.
-
-```{python}
-importances_mdi = pd.Series(
-    rf.feature_importances_,
-    index=X.columns
-).sort_values(ascending=True)
-
-plt.figure(figsize=(8, 8))
-importances_mdi.tail(15).plot(kind="barh", color="#1B5AA0", edgecolor="white")
-plt.title("Top 15 Features: Mean Decrease in Impurity\n(Random Forest)")
-plt.xlabel("Feature importance (MDI)")
-plt.tight_layout()
-plt.show()
-```
-
-### Method 2: Permutation Importance (recommended)
+#### Permutation Importance
 
 Permutation importance measures how much model performance drops when a feature's values are randomly shuffled — breaking its relationship with the outcome. It is model-agnostic and unbiased, but slower:
 
@@ -204,12 +189,8 @@ plt.tight_layout()
 plt.show()
 ```
 
-::: {.callout-note}
-### Important points
-**Permutation importance** is the preferred method for reporting in clinical papers. MDI is useful for quick exploration but should not be quoted in publications due to its bias towards numeric features with many unique values. The error bars from multiple repeats tell you how stable the importance estimate is.
-:::
 
-::: {.callout-warning}
+::: {.callout-note}
 ### Feature importance ≠ causation
 High importance for `los_days` means it is predictive of readmission in this dataset, **not** that shorter admissions cause readmissions. Length of stay is likely a proxy for illness severity. This distinction is critical when considering clinical action based on the model.
 :::
@@ -253,10 +234,7 @@ print(f"Best parameters: {grid_search.best_params_}")
 print(f"Best CV AUC:     {grid_search.best_score_:.3f}")
 ```
 
-```
-Best parameters: {'max_depth': 8, 'min_samples_leaf': 20, 'n_estimators': 200}
-Best CV AUC: 0.787
-```
+
 
 ::: {.callout-tip}
 ### Exercise 10

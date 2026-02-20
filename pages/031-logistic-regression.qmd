@@ -5,43 +5,6 @@ title: "Logistic Regression"
 <span class="time-badge">⏱ 30 minutes</span>
 
 
-```{python}
-#| echo: false
-
-import pandas as pd
-import numpy as np
-
-url = "https://raw.githubusercontent.com/pauerola/nhs-data-science/refs/heads/main/data/nhs_readmission.csv"
-
-df = pd.read_csv(
-    url,
-    skiprows=3,
-    index_col="patient_id",
-    na_values=[".", "N/A", "NULL", "UNKNOWN"],  # Add this
-)
-
-
-df["egfr_missing"] = df["egfr"].isnull().astype(int)
-df["egfr"] = df["egfr"].fillna(df["egfr"].median())
-
-bmi_median = df["bmi"].median()
-df["bmi"] = df["bmi"].fillna(bmi_median)
-
-ward_mode = df["discharge_ward"].mode()[0]
-df["discharge_ward"] = df["discharge_ward"].fillna(ward_mode)
-
-df["hba1c_missing"] = df["hba1c"].isnull().astype(int)
-df["hba1c"] = df["hba1c"].fillna(df["hba1c"].median())
-
-## Fill any remaining numeric NaNs with median
-#numeric_cols = df.select_dtypes(include=np.number).columns
-#df[numeric_cols] = df[numeric_cols].fillna(df[numeric_cols].median())
-
-df.dropna(inplace=True)
-
-```
-
-
 Logistic regression is the **workhorse of clinical prediction modelling**. It underpins QRISK3, the Framingham risk score, and hundreds of published clinical risk tools. Before reaching for complex models, logistic regression should always be your first attempt — it is interpretable, fast, and often surprisingly competitive.
 
 ### How it works
@@ -96,7 +59,7 @@ ax.set_ylim(-0.05, 1.05)
 ax.tick_params(colors="#555", labelsize=9)
 
 plt.tight_layout()
-plt.savefig("sigmoid.png", dpi=150, bbox_inches="tight", facecolor=fig.get_facecolor())
+#plt.savefig("sigmoid.png", dpi=150, bbox_inches="tight", facecolor=fig.get_facecolor())
 plt.show()
 ```
 
@@ -108,6 +71,47 @@ plt.show()
 
 
 ### Preparing the Features
+
+
+::: {.callout-note collapse="true"}
+### Don't forget to load your data...
+```{python}
+
+import pandas as pd
+import numpy as np
+
+url = "https://raw.githubusercontent.com/Bristol-Training/nhs-data-science/refs/heads/main/data/nhs_readmission.csv"
+
+df = pd.read_csv(
+    url,
+    skiprows=3,
+    index_col="patient_id",
+    na_values=[".", "N/A", "NULL", "UNKNOWN"],  # Add this
+)
+
+
+df["egfr_missing"] = df["egfr"].isnull().astype(int)
+df["egfr"] = df["egfr"].fillna(df["egfr"].median())
+
+bmi_median = df["bmi"].median()
+df["bmi"] = df["bmi"].fillna(bmi_median)
+
+ward_mode = df["discharge_ward"].mode()[0]
+df["discharge_ward"] = df["discharge_ward"].fillna(ward_mode)
+
+df["hba1c_missing"] = df["hba1c"].isnull().astype(int)
+df["hba1c"] = df["hba1c"].fillna(df["hba1c"].median())
+
+## Fill any remaining numeric NaNs with median
+#numeric_cols = df.select_dtypes(include=np.number).columns
+#df[numeric_cols] = df[numeric_cols].fillna(df[numeric_cols].median())
+
+df.dropna(inplace=True)
+
+```
+:::
+
+
 
 ```{python}
 import pandas as pd
@@ -235,13 +239,9 @@ plt.tight_layout()
 plt.show()
 ```
 
-```
-AUC-ROC: 0.741
-```
-
 ::: {.callout-note}
 ### Important points
-An AUC of 0.74 is consistent with published NHS readmission models. It is meaningfully better than chance (0.50) and indicates genuine predictive signal. However, it also means the model cannot reliably identify individual patients — it is better thought of as a **risk stratification** tool for population-level interventions.
+An AUC of 0.705 is consistent with published NHS readmission models. It is meaningfully better than chance (0.50) and indicates genuine predictive signal. However, it also means the model cannot reliably identify individual patients — it is better thought of as a **risk stratification** tool for population-level interventions.
 :::
 
 ### Interpreting Coefficients as Odds Ratios

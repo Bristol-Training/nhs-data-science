@@ -124,19 +124,21 @@ Colab also includes a wide range of pre‑installed scientific and machine‑lea
 
 
 
-Download `nhs_readmission.csv` from the course repository and place it in your working directory. You can verify everything is set up correctly by running this in a new notebook cell:
+If you are up for **Colab**, you can try to load the sample dataset `nhs_readmission.csv` from the course repository by running this in a new notebook cell:
 
-```{python}
+```python
 import pandas as pd
-import matplotlib.pyplot as plt
-import seaborn as sns
-from sklearn.ensemble import RandomForestClassifier
 
-print("All packages loaded successfully!")
-df = pd.read_csv("https://raw.githubusercontent.com/pauerola/nhs-data-science/refs/heads/main/data/nhs_readmission.csv")
+url = "https://raw.githubusercontent.com/Bristol-Training/nhs-data-science/refs/heads/main/data/nhs_readmission.csv"
+
+df = pd.read_csv(
+    url,
+    skiprows=3,
+    index_col="patient_id",
+    na_values=[".", "N/A", "NULL", "UNKNOWN"],  # Add this
+)
+
 print(f"Dataset loaded: {df.shape[0]} patients, {df.shape[1]} columns")
 
 df.head()
 ```
-
-If you see the success messages, you're ready to go!
