@@ -124,30 +124,27 @@ Now we examine how each predictor relates to our outcome of interest: `readmitte
 ### Box plots and violin plots
 
 ```{python}
-fig, axes = plt.subplots(1, 2, figsize=(12, 5))
-
 # Length of stay by outcome
-sns.boxplot(
+box_plot = sns.boxplot(
     data=df, x="readmitted_30d", y="los_days",
-    palette={"No": "#4A90D9", "Yes": "#E74C3C"},
-    ax=axes[0]
+    palette={"No": "#4A90D9", "Yes": "#E74C3C"}
 )
-axes[0].set_title("Length of Stay by Readmission Status")
-axes[0].set_xlabel("Readmitted within 30 days")
-axes[0].set_ylabel("Length of Stay (days)")
+box_plot.set_title("Length of Stay by Readmission Status")
+box_plot.set_xlabel("Readmitted within 30 days")
+box_plot.set_ylabel("Length of Stay (days)")
+```
 
+
+```{python}
 # Charlson index by outcome
-sns.violinplot(
+violin_plot = sns.violinplot(
     data=df, x="readmitted_30d", y="charlson_index",
     palette={"No": "#4A90D9", "Yes": "#E74C3C"},
-    inner="box", ax=axes[1]
+    inner="box"
 )
-axes[1].set_title("Charlson Comorbidity Index by Readmission Status")
-axes[1].set_xlabel("Readmitted within 30 days")
-axes[1].set_ylabel("Charlson Comorbidity Index")
-
-plt.tight_layout()
-plt.show()
+violin_plot.set_title("Charlson Comorbidity Index by Readmission Status")
+violin_plot.set_xlabel("Readmitted within 30 days")
+violin_plot.set_ylabel("Charlson Comorbidity Index")
 ```
 
 
